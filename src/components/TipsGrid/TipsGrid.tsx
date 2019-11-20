@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+
+import Tip from '../../types/tip';
 
 const TipsGrid = () => {
-  const [tips, setTips] = useState([]);
+  const [tips, setTips] = useState<Tip[]>([]);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/tips`).then(res => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    axios.get<any, AxiosResponse<Tip[]>>(`${process.env.REACT_APP_BACKEND_URL}/tips`).then(res => {
       setTips(res.data);
     });
   }, []);
