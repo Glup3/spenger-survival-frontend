@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
+import StackGrid from 'react-stack-grid';
 
 import Tip from '../../types/tip';
+import TipCard from '../TipCard';
 
 const TipsGrid = () => {
   const [tips, setTips] = useState<Tip[]>([]);
@@ -14,13 +16,11 @@ const TipsGrid = () => {
   }, []);
 
   return (
-    <div>
-      <ul>
-        {tips.map(tip => (
-          <li key={`tip-${tip.id}`}>{tip.title}</li>
-        ))}
-      </ul>
-    </div>
+    <StackGrid columnWidth={250} gutterWidth={10} gutterHeight={10}>
+      {tips.map(tip => (
+        <TipCard key={`tip-${tip.id}`} tip={tip} />
+      ))}
+    </StackGrid>
   );
 };
 
