@@ -1,7 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { HomePage, NotFoundPage, AddTipPage, DataPrivacyPage, HallOfFamePage, ImprintPage, MotivationPage } from '../../pages';
+import {
+  HomePage,
+  NotFoundPage,
+  AddTipPage,
+  DataPrivacyPage,
+  HallOfFamePage,
+  ImprintPage,
+  MotivationPage,
+} from '../../pages';
 
 const App = () => {
   return (

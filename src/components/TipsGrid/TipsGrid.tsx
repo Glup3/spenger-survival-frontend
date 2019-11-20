@@ -5,7 +5,7 @@ const TipsGrid = () => {
   const [tips, setTips] = useState([]);
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + '/tips').then(res => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/tips`).then(res => {
       setTips(res.data);
     });
   }, []);
