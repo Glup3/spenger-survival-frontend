@@ -12,8 +12,6 @@ const Searchbar = () => {
   const onSubmit = async e => {
     e.preventDefault();
 
-    console.log('what');
-
     data.fetchTips(value);
   };
 

@@ -15,6 +15,7 @@ interface DataProviderPropsType {
 interface DataContextValuesType {
   tips: Tip[];
   loading: boolean;
+  tipsCount: number;
   fetchTips: FetchTipsType;
 }
 
@@ -22,6 +23,7 @@ const DataContext = createContext<Partial<DataContextValuesType>>(null);
 
 export const DataProvider = (props: DataProviderPropsType) => {
   const [tips, setTips] = useState<Tip[]>([]);
+  const [tipsCount, setTipsCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const fetchTips = async (searchTerm: string, page = 0, perPage = 15): Promise<void> => {
@@ -47,6 +49,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     );
 
     setTips(result.data.rows);
+    setTipsCount(result.data.count);
     setLoading(false);
   };
 
@@ -57,6 +60,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const value = {
     tips,
     loading,
+    tipsCount,
     fetchTips,
   };
 
