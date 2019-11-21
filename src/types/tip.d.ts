@@ -6,7 +6,7 @@ export default interface Tip {
   schoolClass?: string;
   vintage: number;
   department?: string;
-  issueDate?: Date;
+  issueDate: Date;
   verified: boolean;
   gender?: string;
 }

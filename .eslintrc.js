@@ -12,7 +12,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'import/no-cycle': 'off',
     'no-underscore-dangle': 'off',
-    'prettier/prettier': 'error'
+    'prettier/prettier': 'error',
+    'no-plusplus': 'off'
   },
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
