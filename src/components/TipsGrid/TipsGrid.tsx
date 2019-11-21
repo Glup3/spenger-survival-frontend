@@ -12,7 +12,7 @@ const gutterSize = 15;
 
 const TipsGrid = ({ tips }: TipsGridPropsType) => {
   return (
-    <StackGrid columnWidth={300} gutterWidth={gutterSize} gutterHeight={gutterSize}>
+    <StackGrid columnWidth={300} gutterWidth={gutterSize} gutterHeight={gutterSize} duration={1000}>
       {tips.map(tip => (
         <TipCard key={`tip-${tip.id}`} tip={tip} />
       ))}

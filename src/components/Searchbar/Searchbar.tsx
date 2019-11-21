@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDebounce } from 'use-lodash-debounce';
 
 interface SearchbarPropsType {
   handleInput: Function;
@@ -6,6 +7,11 @@ interface SearchbarPropsType {
 
 const Searchbar = ({ handleInput }: SearchbarPropsType) => {
   const [searchInput, setSearchInput] = useState<string>('');
+  const debouncedSearchInput = useDebounce(searchInput, 250);
+
+  useEffect(() => {
+    handleInput(debouncedSearchInput);
+  }, [debouncedSearchInput, handleInput]);
 
   return (
     <input
@@ -14,9 +20,7 @@ const Searchbar = ({ handleInput }: SearchbarPropsType) => {
       placeholder="Titel oder Klasse suchen..."
       aria-label="Search"
       onChange={e => {
-        const { value } = e.target;
-        setSearchInput(value);
-        handleInput(value);
+        setSearchInput(e.target.value);
       }}
       value={searchInput}
     />
