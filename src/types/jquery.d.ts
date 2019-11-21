@@ -1,3 +1,3 @@
 interface JQuery {
-  tooltip(): any;
+  tooltip(options?: any, callback?: Function): any;
 }

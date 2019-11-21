@@ -21,14 +21,14 @@ const TipCard = ({ tip }: TipCardPropsType) => {
           <GenderIcon gender={tip.gender} />
         </h6>
         <p className="card-text">{tip.description}</p>
-        <p className="card-text">
+        <div className="card-text">
           <div className="float-left">
             <TipCardDate issueDate={tip.issueDate} />
           </div>
           <div className="float-right">
             <TipCardSchoolClass schoolClass={tip.schoolClass} department={tip.department} />
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );

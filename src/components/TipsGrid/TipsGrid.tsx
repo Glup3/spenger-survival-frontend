@@ -11,8 +11,6 @@ interface TipsGridPropsType {
 const gutterSize = 15;
 
 const TipsGrid = ({ tips }: TipsGridPropsType) => {
-  console.log(tips);
-
   return (
     <StackGrid columnWidth={300} gutterWidth={gutterSize} gutterHeight={gutterSize}>
       {tips.map(tip => (

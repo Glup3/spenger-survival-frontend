@@ -1,3 +1,6 @@
 .school-class {
   text-decoration: underline;
+  &:hover {
+    cursor: help;
+  }
 }
