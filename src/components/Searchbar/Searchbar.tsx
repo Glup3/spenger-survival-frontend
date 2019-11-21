@@ -1,29 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { useDebounce } from 'use-lodash-debounce';
+import React from 'react';
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-interface SearchbarPropsType {
-  handleInput: Function;
-}
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useInput from '../../hooks/input-hook';
+import { useData } from '../../context/dataContext';
 
-const Searchbar = ({ handleInput }: SearchbarPropsType) => {
-  const [searchInput, setSearchInput] = useState<string>('');
-  const debouncedSearchInput = useDebounce(searchInput, 250);
+const Searchbar = () => {
+  const { value, bind, reset } = useInput('');
+  const data = useData();
 
-  useEffect(() => {
-    handleInput(debouncedSearchInput);
-  }, [debouncedSearchInput, handleInput]);
+  const onSubmit = async e => {
+    e.preventDefault();
+
+    console.log('what');
+
+    data.fetchTips(value);
+  };
 
   return (
-    <input
-      className="form-control form-control-sm"
-      type="text"
-      placeholder="Titel oder Klasse suchen..."
-      aria-label="Search"
-      onChange={e => {
-        setSearchInput(e.target.value);
-      }}
-      value={searchInput}
-    />
+    <form onSubmit={onSubmit}>
+      <div className="input-group">
+        <input
+          className={`form-control ${value === '' ? 'border-dark' : 'border-primary'}`}
+          type="text"
+          placeholder="Titel / Beschreibung / Klasse / Autor / Abteilung  suchen..."
+          aria-label="Search"
+          {...bind}
+        />
+        <div className="input-group-append">
+          {value === '' ? (
+            <button className="btn btn-outline-dark" type="submit">
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
+          ) : (
+            <button className="btn btn-outline-primary" type="button" onClick={() => reset()}>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+          )}
+        </div>
+      </div>
+    </form>
   );
 };
 

@@ -14,7 +14,7 @@ import { DataProvider } from '../../context/dataContext';
 
 const App = () => {
   return (
-    <DataProvider getTips={null}>
+    <DataProvider>
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
