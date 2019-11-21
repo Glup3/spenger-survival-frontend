@@ -32,7 +32,7 @@ const HomePage = () => {
 
   return (
     <div className="container-fluid">
-      <h1 className="text-center mb-6">Home Page</h1>
+      <h1 className="text-center">Tipps von Spengergassler</h1>
       <TipsGrid tips={tips} />
     </div>
   );

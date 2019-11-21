@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMars, faVenus, faGenderless } from '@fortawesome/free-solid-svg-icons';
+import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
 
 import './GenderIcon.scss';
 
@@ -17,7 +17,7 @@ const GenderIcon = ({ gender }: GenderIconPropsType) => {
     return <FontAwesomeIcon icon={faVenus} />;
   }
 
-  return <FontAwesomeIcon icon={faGenderless} />;
+  return <></>;
 };
 
 export default GenderIcon;
