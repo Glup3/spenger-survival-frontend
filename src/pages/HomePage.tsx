@@ -1,37 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
 
 import TipsGrid from '../components/TipsGrid';
 import Tip from '../types/tip';
 import Searchbar from '../components/Searchbar';
+import { useData } from '../context/dataContext';
 
 const HomePage = () => {
   const [tips, setTips] = useState<Tip[]>([]);
   const [searchInput, setSearchInput] = useState<string>('');
+  const data = useData();
 
   useEffect(() => {
-    const fetchData = async () => {
-      axios.interceptors.response.use(
-        response => {
-          for (let i = 0; i < response.data.length; i++) {
-            response.data[i].issueDate = new Date(response.data[i].issueDate);
-          }
-
-          return response;
-        },
-        error => {
-          return Promise.reject(error);
-        }
-      );
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res = await axios.get<any, AxiosResponse<Tip[]>>(`${process.env.REACT_APP_BACKEND_URL}/tips`);
-
-      setTips(res.data);
+    const fetchInitialTips = async () => {
+      const result = await data.getTips();
+      setTips(result.rows);
     };
 
-    fetchData();
-  }, []);
+    fetchInitialTips();
+  }, [data]);
 
   const handleInputChange = (value: string) => {
     setSearchInput(value);
