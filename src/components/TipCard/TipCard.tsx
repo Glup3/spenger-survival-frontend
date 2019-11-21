@@ -13,7 +13,7 @@ interface TipCardPropsType {
 
 const TipCard = ({ tip }: TipCardPropsType) => {
   return (
-    <div className={`card shadow ${tip.verified && 'border-danger'}`}>
+    <div className={`card tip-card ${tip.verified && 'border-danger'}`}>
       <div className="card-body">
         <h5 className="card-title">{tip.title}</h5>
         <h6 className="card-subtitle mb-2 text-muted">
