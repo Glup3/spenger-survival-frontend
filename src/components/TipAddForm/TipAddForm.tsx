@@ -5,11 +5,22 @@ import './TipAddForm.scss';
 
 const TipAddForm = () => {
   const [description, setDescription] = useState('');
+  const [limitExceeded, setLimitExceeded] = useState(false);
 
   const onSubmit = e => {
     e.preventDefault();
 
     console.log('cool form', description);
+  };
+
+  const onDescriptionChange = (content, _, __, editor) => {
+    if (editor.getLength() > 1024) {
+      setLimitExceeded(true);
+      return;
+    }
+
+    setLimitExceeded(false);
+    setDescription(content);
   };
 
   return (
@@ -73,14 +84,10 @@ const TipAddForm = () => {
         <input type="text" className="form-control" id="titel" placeholder="Titel" />
       </div>
 
-      {/* <div className="form-group">
-        <label htmlFor="beschreibung">Beschreibung</label>
-        <textarea className="form-control" id="beschreibung" rows={5}></textarea>
-      </div> */}
-
       <div className="form-group">
         <label htmlFor="beschreibung">Beschreibung</label>
-        <ReactQuill value={description} onChange={value => setDescription(value)} />
+        <ReactQuill defaultValue={description} onChange={onDescriptionChange} />
+        {limitExceeded ? <span className="float-right text-danger">Zu viele Zeichen!</span> : <></>}
       </div>
 
       <button type="submit" className="btn btn-primary">
