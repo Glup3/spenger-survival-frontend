@@ -7,6 +7,7 @@ import './TipCard.scss';
 import TipCardSchoolClass from '../TipCardSchoolClass';
 import TipCardDate from '../TipCardDate';
 import CardTitle from '../CardTitle';
+import ReportButton from '../ReportButton';
 
 interface TipCardPropsType {
   tip: Tip;
@@ -28,6 +29,9 @@ const TipCard = ({ tip }: TipCardPropsType) => {
           </div>
           <div className="float-right">
             <TipCardSchoolClass schoolClass={tip.schoolClass} department={tip.department} />
+          </div>
+          <div className="float-right mr-2">
+            <ReportButton />
           </div>
         </div>
       </div>
