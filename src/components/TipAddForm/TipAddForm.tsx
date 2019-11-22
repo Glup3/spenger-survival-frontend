@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import './TipAddForm.scss';
 
 const TipAddForm = () => {
+  const [captchaValue, setCaptchaValue] = useState(null);
   const [description, setDescription] = useState('');
   const [limitExceeded, setLimitExceeded] = useState(false);
 
@@ -11,6 +13,7 @@ const TipAddForm = () => {
     e.preventDefault();
 
     console.log('cool form', description);
+    console.log('captcha', captchaValue);
   };
 
   const onDescriptionChange = (content, _, __, editor) => {
@@ -88,6 +91,10 @@ const TipAddForm = () => {
         <label htmlFor="beschreibung">Beschreibung</label>
         <ReactQuill defaultValue={description} onChange={onDescriptionChange} />
         {limitExceeded ? <span className="float-right text-danger">Zu viele Zeichen!</span> : <></>}
+      </div>
+
+      <div className="form-group">
+        <ReCAPTCHA sitekey="6LcTNMQUAAAAAGt-okF_vs0tfm3eouRqpN6SM3i7" onChange={value => setCaptchaValue(value)} />
       </div>
 
       <button type="submit" className="btn btn-primary">
