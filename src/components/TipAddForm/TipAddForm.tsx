@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ReactQuill from 'react-quill';
+
+import './TipAddForm.scss';
 
 const TipAddForm = () => {
+  const [description, setDescription] = useState('');
+
   const onSubmit = e => {
     e.preventDefault();
+
+    console.log('cool form', description);
   };
 
   return (
@@ -66,9 +73,14 @@ const TipAddForm = () => {
         <input type="text" className="form-control" id="titel" placeholder="Titel" />
       </div>
 
-      <div className="form-group">
+      {/* <div className="form-group">
         <label htmlFor="beschreibung">Beschreibung</label>
         <textarea className="form-control" id="beschreibung" rows={5}></textarea>
+      </div> */}
+
+      <div className="form-group">
+        <label htmlFor="beschreibung">Beschreibung</label>
+        <ReactQuill value={description} onChange={value => setDescription(value)} />
       </div>
 
       <button type="submit" className="btn btn-primary">

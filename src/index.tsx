@@ -4,6 +4,7 @@ import * as serviceWorker from './serviceWorker';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'react-quill/dist/quill.snow.css';
 
 import App from './components/App';
 
