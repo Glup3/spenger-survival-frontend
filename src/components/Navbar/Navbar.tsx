@@ -43,7 +43,7 @@ const Navbar = () => {
         <ul className="navbar-nav">
           <li className={`nav-item ${pathname === '/datenschutz' ? 'active' : ''}`}>
             <Link to="/datenschutz" className="nav-link">
-              Datenschutzerklärung
+              Datenschutz
             </Link>
           </li>
           <li className={`nav-item ${pathname === '/impressum' ? 'active' : ''}`}>
