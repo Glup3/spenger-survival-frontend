@@ -29,8 +29,8 @@ const Navbar = () => {
               About
             </Link>
           </li>
-          <li className={`nav-item ${pathname === '/tipp-adden' ? 'active' : ''}`}>
-            <Link to="/tipp-adden" className="nav-link">
+          <li className={`nav-item ${pathname === '/tipp-abgeben' ? 'active' : ''}`}>
+            <Link to="/tipp-abgeben" className="nav-link">
               Tipp abgeben
             </Link>
           </li>
