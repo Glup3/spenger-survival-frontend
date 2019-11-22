@@ -11,11 +11,13 @@ import {
   MotivationPage,
 } from '../../pages';
 import { DataProvider } from '../../context/dataContext';
+import Navbar from '../Navbar';
 
 const App = () => {
   return (
     <DataProvider>
       <Router>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/tipp-adden" component={AddTipPage} />
