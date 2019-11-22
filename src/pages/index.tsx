@@ -4,6 +4,6 @@ import AddTipPage from './AddTipPage';
 import DataPrivacyPage from './DataPrivacyPage';
 import HallOfFamePage from './HallOfFamePage';
 import ImprintPage from './ImprintPage';
-import MotivationPage from './MotivationPage';
+import AboutPage from './AboutPage';
 
-export { HomePage, NotFoundPage, AddTipPage, DataPrivacyPage, HallOfFamePage, ImprintPage, MotivationPage };
+export { HomePage, NotFoundPage, AddTipPage, DataPrivacyPage, HallOfFamePage, ImprintPage, AboutPage };

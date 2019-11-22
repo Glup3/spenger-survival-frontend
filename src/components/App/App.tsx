@@ -8,7 +8,7 @@ import {
   DataPrivacyPage,
   HallOfFamePage,
   ImprintPage,
-  MotivationPage,
+  AboutPage,
 } from '../../pages';
 import { DataProvider } from '../../context/dataContext';
 import Navbar from '../Navbar';
@@ -24,7 +24,7 @@ const App = () => {
           <Route path="/datenschutz" component={DataPrivacyPage} />
           <Route path="/hall-of-fame" component={HallOfFamePage} />
           <Route path="/impressum" component={ImprintPage} />
-          <Route path="/motivation" component={MotivationPage} />
+          <Route path="/about" component={AboutPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

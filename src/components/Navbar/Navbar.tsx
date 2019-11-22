@@ -22,18 +22,18 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <Link to="/motivation" className="nav-link">
+            <Link to="/about" className="nav-link">
               About
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/hall-of-fame" className="nav-link">
-              Hall of Fame
             </Link>
           </li>
           <li className="nav-item">
             <Link to="/tipp-adden" className="nav-link">
               Tipp abgeben
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/hall-of-fame" className="nav-link">
+              Hall of Fame
             </Link>
           </li>
         </ul>
