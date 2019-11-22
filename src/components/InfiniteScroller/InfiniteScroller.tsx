@@ -3,6 +3,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { useData } from '../../context/dataContext';
 import TipsGrid from '../TipsGrid';
+import LoadingSpinner from '../LoadingSpinner';
+import InfiniteScrollerEnd from '../InfiniteScrollerEnd';
 
 const InfiniteScroller = () => {
   const data = useData();
@@ -16,9 +18,17 @@ const InfiniteScroller = () => {
     <InfiniteScroll
       dataLength={data.tips.length}
       hasMore={data.tips.length < data.tipsCount}
-      loader={<h4 className="text-center">Loading...</h4>}
+      loader={
+        <div className="text-center mt-4">
+          <LoadingSpinner />
+        </div>
+      }
       next={() => data.fetchMoreTips()}
-      endMessage={<h4 className="text-center">Ende erreicht</h4>}
+      endMessage={
+        <div className="text-center mt-4">
+          <InfiniteScrollerEnd />
+        </div>
+      }
     >
       <TipsGrid tips={data.tips} />
     </InfiniteScroll>

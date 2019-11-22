@@ -6,6 +6,7 @@ import GenderIcon from '../GenderIcon/GenderIcon';
 import './TipCard.scss';
 import TipCardSchoolClass from '../TipCardSchoolClass';
 import TipCardDate from '../TipCardDate';
+import CardTitle from '../CardTitle';
 
 interface TipCardPropsType {
   tip: Tip;
@@ -13,9 +14,9 @@ interface TipCardPropsType {
 
 const TipCard = ({ tip }: TipCardPropsType) => {
   return (
-    <div className={`card tip-card ${tip.verified && 'border-danger'}`}>
+    <div className="card tip-card">
       <div className="card-body">
-        <h5 className="card-title">{tip.title}</h5>
+        <CardTitle title={tip.title} verified={tip.verified} />
         <h6 className="card-subtitle mb-2 text-muted">
           <span>von {tip.author || 'Anonym'} </span>
           <GenderIcon gender={tip.gender} />

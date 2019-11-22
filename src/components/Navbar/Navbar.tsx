@@ -31,6 +31,11 @@ const Navbar = () => {
               Hall of Fame
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to="/tipp-adden" className="nav-link">
+              Tipp abgeben
+            </Link>
+          </li>
         </ul>
         <ul className="navbar-nav">
           <li className="nav-item">
