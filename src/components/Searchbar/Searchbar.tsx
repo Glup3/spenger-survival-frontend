@@ -12,7 +12,7 @@ const Searchbar = () => {
   const onSubmit = async e => {
     e.preventDefault();
 
-    data.fetchTips(value);
+    data.fetchInitialTips(value);
   };
 
   return (

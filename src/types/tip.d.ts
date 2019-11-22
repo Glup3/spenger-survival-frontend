@@ -4,7 +4,6 @@ export default interface Tip {
   title: string;
   description: string;
   schoolClass?: string;
-  vintage: number;
   department?: string;
   issueDate: Date;
   verified: boolean;
