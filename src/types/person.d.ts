@@ -8,6 +8,8 @@ export default interface Person {
   linkedin?: string;
   snapchat?: string;
   facebook?: string;
+  stackOverflow?: string;
+  github?: string;
   discord?: string;
   paypal?: string;
   youtube?: string;
