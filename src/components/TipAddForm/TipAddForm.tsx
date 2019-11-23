@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { Redirect } from 'react-router-dom';
 
 import useInput from '../../hooks/input-hook';
 import { isEmptyOrSpaces } from '../../util/string-helper';
+import { useData } from '../../context/dataContext';
+
+import RequiredStar from '../RequiredStar';
 
 import './TipAddForm.scss';
-import RequiredStar from '../RequiredStar';
-import { useData } from '../../context/dataContext';
 
 const modules = {
   toolbar: [
@@ -36,6 +38,7 @@ const TipAddForm = () => {
   const [captchaValue, setCaptchaValue] = useState(null);
   const [captchaError, setCaptchaError] = useState(false);
   const [limitExceeded, setLimitExceeded] = useState(false);
+  const [success, setSuccess] = useState<boolean>(null);
 
   const checkValidation = (): boolean => {
     let hasErrors = false;
@@ -85,7 +88,13 @@ const TipAddForm = () => {
       description,
     };
 
-    console.log('RESP', await data.addTip(newTip));
+    const result = await data.addTip(newTip);
+
+    if (result === true) {
+      setSuccess(true);
+    } else {
+      setSuccess(false);
+    }
   };
 
   const onDescriptionChange = (content, _, __, editor) => {
@@ -97,6 +106,10 @@ const TipAddForm = () => {
     setLimitExceeded(false);
     setDescription(content);
   };
+
+  if (success) {
+    return <Redirect to="/tipp-bestaetigung" />;
+  }
 
   return (
     <form onSubmit={onSubmit} noValidate>
@@ -189,6 +202,14 @@ const TipAddForm = () => {
         <ReCAPTCHA sitekey="6LcTNMQUAAAAAGt-okF_vs0tfm3eouRqpN6SM3i7" onChange={value => setCaptchaValue(value)} />
         {captchaError ? <span className="text-danger">ReCAPTCHA machen!</span> : <></>}
       </div>
+
+      {!success ? (
+        <div className="form-group">
+          <span className="text-danger"></span>
+        </div>
+      ) : (
+        <></>
+      )}
 
       <button type="submit" className="btn btn-primary">
         Tipp abgeben
