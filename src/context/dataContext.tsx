@@ -55,7 +55,7 @@ const fetchTips = async (searchTerm: string, offset = 0, perPage = perPageDefaul
 const addTip = async (tip: AddTipBody): Promise<boolean> => {
   const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/tips`, tip);
 
-  if (result.data.responseCode === 200) {
+  if (result.status === 200) {
     return true;
   }
 
