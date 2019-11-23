@@ -2,22 +2,63 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import './TipAddForm.scss';
 import useInput from '../../hooks/input-hook';
+import { isEmptyOrSpaces } from '../../util/string-helper';
+
+import './TipAddForm.scss';
+import RequiredStar from '../RequiredStar';
 
 const TipAddForm = () => {
+  const { value: titleValue, bind: titleBind } = useInput('');
   const { value: nameValue, bind: nameBind } = useInput('');
   const { value: schoolClassValue, bind: schoolClassBind } = useInput('');
-  const { value: titleValue, bind: titleBind } = useInput('');
   const { value: genderValue, bind: genderBind } = useInput('');
   const { value: departmentValue, bind: departmentBind } = useInput('');
-  const [description, setDescription] = useState('');
 
+  const [description, setDescription] = useState('');
+  const [descriptionError, setDescriptionError] = useState(false);
+  const [titleError, setTitleError] = useState(false);
   const [captchaValue, setCaptchaValue] = useState(null);
+  const [captchaError, setCaptchaError] = useState(false);
   const [limitExceeded, setLimitExceeded] = useState(false);
+
+  const checkValidation = (): boolean => {
+    let hasErrors = false;
+
+    if (isEmptyOrSpaces(captchaValue)) {
+      setCaptchaError(true);
+      hasErrors = true;
+    } else {
+      setCaptchaError(false);
+    }
+
+    if (isEmptyOrSpaces(titleValue)) {
+      setTitleError(true);
+      hasErrors = true;
+    } else {
+      setTitleError(false);
+    }
+
+    if (isEmptyOrSpaces(description)) {
+      setDescriptionError(true);
+      hasErrors = true;
+    } else {
+      setDescriptionError(false);
+    }
+
+    if (limitExceeded) {
+      hasErrors = true;
+    }
+
+    return hasErrors;
+  };
 
   const onSubmit = e => {
     e.preventDefault();
+
+    if (checkValidation()) {
+      return;
+    }
 
     const newTip = {
       title: titleValue,
@@ -43,7 +84,7 @@ const TipAddForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} noValidate>
       <div className="row mb-4">
         <div className="col">
           <label htmlFor="name">Name</label>
@@ -51,7 +92,7 @@ const TipAddForm = () => {
             id="name"
             type="text"
             className="form-control"
-            placeholder="Name leer lassen --> Anonym"
+            placeholder="Leer --> Anonym"
             value={nameValue}
             {...nameBind}
           />
@@ -74,7 +115,7 @@ const TipAddForm = () => {
             id="klasse"
             type="text"
             className="form-control"
-            placeholder="Klasse leer lassen --> Anonym"
+            placeholder="Leer --> Keine Angabe"
             value={schoolClassValue}
             {...schoolClassBind}
           />
@@ -83,7 +124,7 @@ const TipAddForm = () => {
         <div className="col">
           <label htmlFor="abteilung">Abteilung</label>
           <select className="form-control" id="abteilung" value={departmentValue} {...departmentBind}>
-            <option value="">Unbekannt</option>
+            <option value="">Keine Angabe</option>
             <option value="Animation">Animation</option>
             <option value="Betriebsinformatik">Betriebsinformatik</option>
             <option value="Biomedizin">Biomedizin</option>
@@ -97,18 +138,39 @@ const TipAddForm = () => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="titel">Titel</label>
-        <input type="text" className="form-control" id="titel" placeholder="Titel" value={titleValue} {...titleBind} />
+        <label htmlFor="titel">
+          Titel
+          <RequiredStar />
+        </label>
+        <input
+          type="text"
+          className={`form-control ${titleError ? 'border border-danger' : ''}`}
+          id="titel"
+          placeholder="Titel"
+          value={titleValue}
+          {...titleBind}
+        />
+        {titleError ? <span className="text-danger">Titel eingeben!</span> : <></>}
       </div>
 
       <div className="form-group">
-        <label htmlFor="beschreibung">Text</label>
-        <ReactQuill defaultValue={description} onChange={onDescriptionChange} id="beschreibung" />
+        <label htmlFor="beschreibung">
+          Text
+          <RequiredStar />
+        </label>
+        <ReactQuill
+          defaultValue={description}
+          onChange={onDescriptionChange}
+          id="beschreibung"
+          className={`${descriptionError ? 'border border-danger' : ''}`}
+        />
+        {descriptionError ? <span className="text-danger">Text eingeben!</span> : <></>}
         {limitExceeded ? <span className="float-right text-danger">Zu viele Zeichen!</span> : <></>}
       </div>
 
       <div className="form-group">
         <ReCAPTCHA sitekey="6LcTNMQUAAAAAGt-okF_vs0tfm3eouRqpN6SM3i7" onChange={value => setCaptchaValue(value)} />
+        {captchaError ? <span className="text-danger">ReCAPTCHA machen!</span> : <></>}
       </div>
 
       <button type="submit" className="btn btn-primary">
