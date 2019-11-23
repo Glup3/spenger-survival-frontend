@@ -22,7 +22,7 @@ const TipCard = ({ tip }: TipCardPropsType) => {
           <span>von {tip.author || 'Anonym'} </span>
           <GenderIcon gender={tip.gender} />
         </h6>
-        <p className="card-text">{tip.description}</p>
+        <div className="card-text" dangerouslySetInnerHTML={{ __html: tip.description }}></div>
         <div className="card-text">
           <div className="float-left">
             <TipCardDate issueDate={tip.issueDate} />

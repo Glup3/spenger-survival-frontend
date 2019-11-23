@@ -7,8 +7,23 @@ import { isEmptyOrSpaces } from '../../util/string-helper';
 
 import './TipAddForm.scss';
 import RequiredStar from '../RequiredStar';
+import { useData } from '../../context/dataContext';
+
+const modules = {
+  toolbar: [
+    [{ header: [2, false] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+    ['link'],
+    ['clean'],
+  ],
+};
+
+const formats = ['header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent', 'link'];
 
 const TipAddForm = () => {
+  const data = useData();
+
   const { value: titleValue, bind: titleBind } = useInput('');
   const { value: nameValue, bind: nameBind } = useInput('');
   const { value: schoolClassValue, bind: schoolClassBind } = useInput('');
@@ -53,7 +68,7 @@ const TipAddForm = () => {
     return hasErrors;
   };
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
 
     if (checkValidation()) {
@@ -70,7 +85,7 @@ const TipAddForm = () => {
       description,
     };
 
-    console.log('NEW TIP', newTip);
+    console.log('RESP', await data.addTip(newTip));
   };
 
   const onDescriptionChange = (content, _, __, editor) => {
@@ -159,6 +174,8 @@ const TipAddForm = () => {
           <RequiredStar />
         </label>
         <ReactQuill
+          modules={modules}
+          formats={formats}
           defaultValue={description}
           onChange={onDescriptionChange}
           id="beschreibung"

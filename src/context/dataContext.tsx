@@ -3,9 +3,26 @@ import axios, { AxiosResponse } from 'axios';
 
 import ResponseTips from '../types/responseTips';
 import Tip from '../types/tip';
+import AddTipBody from '../types/add-tip-body';
+
+axios.interceptors.response.use(
+  (response: AxiosResponse<ResponseTips>) => {
+    if (response.data.rows !== undefined) {
+      for (let i = 0; i < response.data.rows.length; i++) {
+        response.data.rows[i].issueDate = new Date(response.data.rows[i].issueDate);
+      }
+    }
+
+    return response;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 
 type FetchInitialTipsType = (searchTerm: string) => void;
 type FetchMoreTipsType = (perPage?: number) => void;
+type AddTipType = (tip: AddTipBody) => Promise<boolean>;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,6 +34,7 @@ interface DataContextValuesType {
   tipsCount: number;
   fetchInitialTips: FetchInitialTipsType;
   fetchMoreTips: FetchMoreTipsType;
+  addTip: AddTipType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -24,19 +42,6 @@ const DataContext = createContext<Partial<DataContextValuesType>>(null);
 const perPageDefault = 15;
 
 const fetchTips = async (searchTerm: string, offset = 0, perPage = perPageDefault): Promise<ResponseTips> => {
-  axios.interceptors.response.use(
-    (response: AxiosResponse<ResponseTips>) => {
-      for (let i = 0; i < response.data.rows.length; i++) {
-        response.data.rows[i].issueDate = new Date(response.data.rows[i].issueDate);
-      }
-
-      return response;
-    },
-    error => {
-      return Promise.reject(error);
-    }
-  );
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const result = await axios.get<any, AxiosResponse<ResponseTips>>(
     `${process.env.REACT_APP_BACKEND_URL}/tips?page=${offset}&perPage=${perPage}${
@@ -45,6 +50,16 @@ const fetchTips = async (searchTerm: string, offset = 0, perPage = perPageDefaul
   );
 
   return result.data;
+};
+
+const addTip = async (tip: AddTipBody): Promise<boolean> => {
+  const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/tips`, tip);
+
+  if (result.data.responseCode === 200) {
+    return true;
+  }
+
+  return false;
 };
 
 export const DataProvider = (props: DataProviderPropsType) => {
@@ -75,6 +90,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     tipsCount,
     fetchInitialTips,
     fetchMoreTips,
+    addTip,
   };
 
   return <DataContext.Provider value={value}>{props.children}</DataContext.Provider>;
