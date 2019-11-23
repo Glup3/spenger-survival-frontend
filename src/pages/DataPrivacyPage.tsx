@@ -3,7 +3,7 @@ import React from 'react';
 const DataPrivacyPage = () => {
   return (
     <div className="container">
-      <h1>Datenschutzerklärung</h1>
+      <h1 className="text-break">Datenschutzerklärung</h1>
       <h2>Datenschutz</h2>
       <p>
         Wir haben diese Datenschutzerklärung (Fassung 22.11.2019-211107588) verfasst, um Ihnen gemäß der Vorgaben der
@@ -63,7 +63,7 @@ const DataPrivacyPage = () => {
         Übertragung und den Schutz Ihrer Daten garantieren. Wir empfehlen Ihnen, vertrauliche Daten niemals
         unverschlüsselt per E-Mail zu übermitteln.
       </p>
-      <h2>Rechte laut Datenschutzgrundverordnung</h2>
+      <h2 className="text-break">Rechte laut Datenschutzgrundverordnung</h2>
       <p>
         Ihnen stehen laut den Bestimmungen der DSGVO und des österreichischen
         <a
@@ -71,7 +71,7 @@ const DataPrivacyPage = () => {
           rel="noopener noreferrer"
           target="_blank"
         >
-          Datenschutzgesetzes (DSG)
+          <span> Datenschutzgesetzes (DSG) </span>
         </a>
         grundsätzlich die folgende Rechte zu:
       </p>
@@ -95,8 +95,8 @@ const DataPrivacyPage = () => {
         datenschutzrechtlichen Ansprüche sonst in einer Weise verletzt worden sind, können Sie sich bei der
         Aufsichtsbehörde beschweren, welche in Österreich die Datenschutzbehörde ist, deren Webseite Sie unter
         <a href="https://www.dsb.gv.at/?tid=211107588" rel="noopener noreferrer" target="_blank">
-          https://www.dsb.gv.at/
-        </a>{' '}
+          <span> https://www.dsb.gv.at/ </span>
+        </a>
         finden.
       </p>
       <h2>Auswertung des Besucherverhaltens</h2>
@@ -117,7 +117,7 @@ const DataPrivacyPage = () => {
           rel="noopener noreferrer"
           target="_blank"
         >
-          Artikel 25 Absatz 1 DSGVO
+          <span> Artikel 25 Absatz 1 DSGVO</span>
         </a>
         ). Durch den Einsatz von TLS (Transport Layer Security), einem Verschlüsselungsprotokoll zur sicheren
         Datenübertragung im Internet können wir den Schutz vertraulicher Daten sicherstellen. Sie erkennen die Benutzung
@@ -215,7 +215,7 @@ const DataPrivacyPage = () => {
         Folgende Cookies werden von reCAPTCHA verwendet: Hierbei beziehen wir uns auf die reCAPTCHA Demo-Version von
         Google unter
         <a href="https://www.google.com/recaptcha/api2/demo" rel="noopener noreferrer" target="_blank">
-          https://www.google.com/recaptcha/api2/demo
+          <span> https://www.google.com/recaptcha/api2/demo</span>
         </a>
         . All diese Cookies benötigen zu Trackingzwecken eine eindeutige Kennung. Hier ist eine Liste an Cookies, die
         Google reCAPTCHA auf der Demo-Version gesetzt hat:
@@ -232,7 +232,7 @@ const DataPrivacyPage = () => {
         Werbewirksamkeit gemessen und entsprechende Optimierungsmaßnahmen getroffen werden. IDE wird in Browsern unter
         der Domain doubleclick.net gespeichert.
       </p>
-      <p>
+      <p className="text-break">
         <strong>Beispielwert:</strong>&nbsp;WqTUmlnmv_qXyi_DGNPLESKnRNrpgXoy1K-pAZtAkMbHI-211107588
       </p>
       <p>
@@ -261,7 +261,7 @@ const DataPrivacyPage = () => {
         Datenschutzerklärung von Google wird das Cookie im Zusammenhang mit „Werbecookies“ wie z. B. „DSID“, „FLC“,
         „AID“, „TAID“ erwähnt. ANID wird unter Domain google.com gespeichert.
       </p>
-      <p>
+      <p className="text-break">
         <strong>Beispielwert:</strong>&nbsp;U7j1v3dZa2111075880xgZFmiqWppRWKOr
       </p>
       <p>
@@ -329,7 +329,7 @@ const DataPrivacyPage = () => {
         alle Google-Cookies löschen.&nbsp;Grundsätzlich werden die Daten sobald Sie unsere Seite aufrufen automatisch an
         Google übermittelt. Um diese Daten wieder zu löschen, müssen Sie den Google-Support auf&nbsp;
         <a href="https://support.google.com/?hl=de&amp;tid=211107588" rel="noopener noreferrer" target="_blank">
-          https://support.google.com/?hl=de&amp;tid=211107588
+          <span>https://support.google.com/?hl=de&amp;tid=211107588 </span>
         </a>
         kontaktieren.
       </p>
@@ -340,13 +340,13 @@ const DataPrivacyPage = () => {
       <p>
         Etwas mehr über reCAPTCHA erfahren Sie auf der Webentwickler-Seite von Google auf
         <a href="https://developers.google.com/recaptcha/" rel="noopener noreferrer" target="_blank">
-          https://developers.google.com/recaptcha/
+          <span> https://developers.google.com/recaptcha/</span>
         </a>
         . Google geht hier zwar auf die technische Entwicklung der reCAPTCHA näher ein, doch genaue Informationen über
         Datenspeicherung und datenschutzrelevanten Themen sucht man auch dort vergeblich. Eine gute Übersicht über die
         grundsätzliche Verwendung von Daten bei Google finden Sie in der hauseigenen Datenschutzerklärung auf
         <a href="https://policies.google.com/privacy?hl=de&amp;tid=211107588" rel="noopener noreferrer" target="_blank">
-          https://www.google.com/intl/de/policies/privacy/
+          <span> https://www.google.com/intl/de/policies/privacy/</span>
         </a>
         .
       </p>
