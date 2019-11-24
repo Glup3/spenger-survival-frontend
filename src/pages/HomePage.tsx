@@ -8,7 +8,7 @@ import ReportModal from '../components/ReportModal';
 const HomePage = () => {
   return (
     <div className="container-fluid mb-4">
-      <h1 className="text-center">Tipps von Spengergasslern</h1>
+      <h1 className="text-center">Tipps für die HTL Spengergasse</h1>
       <div className="container my-5">
         <Searchbar />
         <TipsCounter />
