@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import SpengerSurvivalLogo from '../SpengerSurvivalLogo';
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -7,7 +8,8 @@ const Navbar = () => {
   return (
     <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-dark mb-4">
       <Link to="/" className="navbar-brand active">
-        Spenger Survival
+        <SpengerSurvivalLogo />
+        <span className="ml-2">Spenger Survival</span>
       </Link>
 
       <button
