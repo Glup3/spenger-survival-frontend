@@ -1,13 +1,24 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-regular-svg-icons';
+import { useAlert } from 'react-alert';
+
+import { useData } from '../../context/dataContext';
 
 import './ReportButton.scss';
 
-const ReportButton = () => {
+interface ReportButtonPropsType {
+  id: number;
+  title: string;
+}
+
+const ReportButton = ({ id, title }: ReportButtonPropsType) => {
+  const data = useData();
+  const alert = useAlert();
+
   const onClick = () => {
-    console.log('NOT YET IMPLEMENTED');
-    // TODO implement me
+    alert.show(`"${title}" wurde gemeldet.`);
+    data.reportTip(id, title, 'Dieser Tipp scheint ein Problem zu haben. Bitte mal anschauen :)');
   };
 
   return (

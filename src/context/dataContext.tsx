@@ -23,6 +23,7 @@ axios.interceptors.response.use(
 type FetchInitialTipsType = (searchTerm: string) => void;
 type FetchMoreTipsType = (perPage?: number) => void;
 type AddTipType = (tip: AddTipBody) => Promise<boolean>;
+type ReportTipType = (id: number, title: string, message: string) => Promise<void>;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,6 +36,7 @@ interface DataContextValuesType {
   fetchInitialTips: FetchInitialTipsType;
   fetchMoreTips: FetchMoreTipsType;
   addTip: AddTipType;
+  reportTip: ReportTipType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -60,6 +62,14 @@ const addTip = async (tip: AddTipBody): Promise<boolean> => {
   }
 
   return false;
+};
+
+const reportTip = async (id: number, title: string, message: string): Promise<void> => {
+  await axios.post(`${process.env.REACT_APP_BACKEND_URL}/tips/report`, {
+    id,
+    title,
+    message,
+  });
 };
 
 export const DataProvider = (props: DataProviderPropsType) => {
@@ -91,6 +101,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     fetchInitialTips,
     fetchMoreTips,
     addTip,
+    reportTip,
   };
 
   return <DataContext.Provider value={value}>{props.children}</DataContext.Provider>;

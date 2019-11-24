@@ -31,7 +31,7 @@ const TipCard = ({ tip }: TipCardPropsType) => {
             <TipCardSchoolClass schoolClass={tip.schoolClass} department={tip.department} />
           </div>
           <div className="float-right mr-2">
-            <ReportButton />
+            <ReportButton id={tip.id} title={tip.title} />
           </div>
         </div>
       </div>
