@@ -36,4 +36,12 @@ export const helpers: Person[] = [
     linkedin: 'https://www.linkedin.com/in/maximilian-gaber-143ba3197/',
     stackOverflow: 'https://stackoverflow.com/users/12347865/max',
   },
+  {
+    name: 'Christopher Tolan',
+    title: 'Art Director',
+    image: 'christopher.png',
+    email: 'tol17717@spengergasse.at',
+    instagram: 'https://www.instagram.com/chris_t0l/',
+    linkedin: 'https://www.linkedin.com/in/christopher-tolan-8a7789158/',
+  },
 ];

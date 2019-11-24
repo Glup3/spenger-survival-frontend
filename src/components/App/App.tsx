@@ -41,7 +41,7 @@ const App = () => {
               <Route path="/about" component={AboutPage} />
               <Route component={NotFoundPage} />
             </Switch>
-            <CookieConsent buttonText="Jup">
+            <CookieConsent buttonText="Verstanden">
               Diese Seite verwendet Cookies, um dir das bestmögliche Erlebnis zu gewährleisten. Surfst du weiterhin auf
               unserer Seite, stimmst du unserer Cookie-Nutzung und unserer Datenschutzrichtlinie zu.
             </CookieConsent>
