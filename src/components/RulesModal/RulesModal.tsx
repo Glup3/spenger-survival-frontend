@@ -10,7 +10,7 @@ const RulesModal = () => {
       aria-hidden="true"
       arida-labelledby="rulesModalLabel"
     >
-      <div className="modal-dialog" role="document">
+      <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Regeln</h5>
@@ -25,8 +25,9 @@ const RulesModal = () => {
               <li>Keine Verleumdungen sowie geschäfts- und rufschädigende Äußerungen</li>
               <li>Nicht prüfbare Unterstellungen und Verdächtigungen</li>
               <li>Werbung und kommerzielle Inhalte</li>
-              <li>Kein ALL CAPS</li>
               <li>Keine Informationen Anderer ohne deren Einverständnis teilen</li>
+              <li>Kein ALL CAPS</li>
+              <li>Keine Fake News</li>
               <li>Be nice :&#041;</li>
             </ol>
           </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import Searchbar from '../components/Searchbar';
 import TipsCounter from '../components/TipsCounter/TipsCounter';
 import InfiniteScroller from '../components/InfiniteScroller';
+import ReportModal from '../components/ReportModal';
 
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
         <Searchbar />
         <TipsCounter />
       </div>
+      <ReportModal />
       <InfiniteScroller />
     </div>
   );

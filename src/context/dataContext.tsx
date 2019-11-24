@@ -24,6 +24,7 @@ type FetchInitialTipsType = (searchTerm: string) => void;
 type FetchMoreTipsType = (perPage?: number) => void;
 type AddTipType = (tip: AddTipBody) => Promise<boolean>;
 type ReportTipType = (id: number, title: string, message: string) => Promise<void>;
+type SetSelectedTip = (value: Tip) => void;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,6 +38,8 @@ interface DataContextValuesType {
   fetchMoreTips: FetchMoreTipsType;
   addTip: AddTipType;
   reportTip: ReportTipType;
+  selectedTip: Tip;
+  setSelectedTip: SetSelectedTip;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -73,6 +76,7 @@ const reportTip = async (id: number, title: string, message: string): Promise<vo
 };
 
 export const DataProvider = (props: DataProviderPropsType) => {
+  const [selectedTip, setSelectedTip] = useState<Tip>(null);
   const [tips, setTips] = useState<Tip[]>([]);
   const [tipsCount, setTipsCount] = useState(0);
   const [searchInput, setSearchInput] = useState('');
@@ -102,6 +106,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
     fetchMoreTips,
     addTip,
     reportTip,
+    selectedTip,
+    setSelectedTip,
   };
 
   return <DataContext.Provider value={value}>{props.children}</DataContext.Provider>;

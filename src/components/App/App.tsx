@@ -21,7 +21,7 @@ import ScrollToTop from '../ScrollToTop';
 const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE,
-  timeout: 3000,
+  timeout: 4000,
 };
 
 const App = () => {

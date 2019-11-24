@@ -1,24 +1,23 @@
 import React from 'react';
+import $ from 'jquery';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-regular-svg-icons';
-import { useAlert } from 'react-alert';
 
+import Tip from '../../types/tip';
 import { useData } from '../../context/dataContext';
 
 import './ReportButton.scss';
 
 interface ReportButtonPropsType {
-  id: number;
-  title: string;
+  tip: Tip;
 }
 
-const ReportButton = ({ id, title }: ReportButtonPropsType) => {
+const ReportButton = ({ tip }: ReportButtonPropsType) => {
   const data = useData();
-  const alert = useAlert();
 
   const onClick = () => {
-    alert.show(`"${title}" wurde gemeldet.`);
-    data.reportTip(id, title, 'Dieser Tipp scheint ein Problem zu haben. Bitte mal anschauen :)');
+    data.setSelectedTip(tip);
+    $('#reportModal').modal();
   };
 
   return (
