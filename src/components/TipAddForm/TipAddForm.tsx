@@ -132,6 +132,7 @@ const TipAddForm = () => {
             <select className="form-control" id="geschlecht" value={genderValue} {...genderBind}>
               <option value="">Keine Angabe</option>
               <option value="m">Männlich</option>
+              <option value="+">Divers</option>
               <option value="w">Weiblich</option>
             </select>
           </div>
