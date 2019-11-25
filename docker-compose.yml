@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  web:
+    container_name: ss-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3001:80'
+    environment:
+      - NODE_ENV=dev
+    env_file:
+      - .env
