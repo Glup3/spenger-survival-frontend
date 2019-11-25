@@ -14,6 +14,14 @@ const InfiniteScroller = () => {
     // eslint-disable-next-line
   }, []);
 
+  if (data.tips.length === 0) {
+    return (
+      <div className="text-center">
+        <InfiniteScrollerEnd />
+      </div>
+    );
+  }
+
   return (
     <InfiniteScroll
       dataLength={data.tips.length}

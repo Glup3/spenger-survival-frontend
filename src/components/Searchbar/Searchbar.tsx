@@ -25,6 +25,15 @@ const Searchbar = () => {
           aria-label="Search"
           {...bind}
         />
+        {data.isLoading && (
+          <div className="input-group-append">
+            <button className="btn btn-outline-primary">
+              <div className="spinner-border spinner-border-sm text-primary" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+            </button>
+          </div>
+        )}
         <div className="input-group-append">
           {value === '' ? (
             <button className="btn btn-outline-dark" type="submit">

@@ -40,6 +40,7 @@ interface DataContextValuesType {
   reportTip: ReportTipType;
   selectedTip: Tip;
   setSelectedTip: SetSelectedTip;
+  isLoading: boolean;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -81,10 +82,13 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [tipsCount, setTipsCount] = useState(0);
   const [searchInput, setSearchInput] = useState('');
   const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchInitialTips = (searchTerm: string): void => {
+    setIsLoading(true);
     fetchTips(searchTerm).then(response => {
       setPage(0);
+      setIsLoading(false);
       setSearchInput(searchTerm);
       setTipsCount(response.count);
       setTips(response.rows);
@@ -92,8 +96,10 @@ export const DataProvider = (props: DataProviderPropsType) => {
   };
 
   const fetchMoreTips = (perPage = perPageDefault): void => {
+    setIsLoading(true);
     fetchTips(searchInput, page + 1, perPage).then(response => {
       setPage(page + 1);
+      setIsLoading(false);
       setTips(tips.concat(response.rows));
       setTipsCount(response.count);
     });
@@ -108,6 +114,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     reportTip,
     selectedTip,
     setSelectedTip,
+    isLoading,
   };
 
   return <DataContext.Provider value={value}>{props.children}</DataContext.Provider>;
