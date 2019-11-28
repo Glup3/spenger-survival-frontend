@@ -6,7 +6,7 @@ import Tip from '../types/tip';
 import AddTipBody from '../types/add-tip-body';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL || 'localhost/api/v1',
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:80/api/v1',
 });
 
 axiosInstance.interceptors.response.use(
@@ -52,14 +52,15 @@ const DataContext = createContext<Partial<DataContextValuesType>>(null);
 const perPageDefault = 15;
 
 const fetchTips = async (searchTerm: string, offset = 0, perPage = perPageDefault): Promise<ResponseTips> => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const url = `/tips?page=${offset}&perPage=${perPage}${searchTerm != null ? `&q=${searchTerm}` : ''}`;
+  try {
+    const url = `/tips?page=${offset}&perPage=${perPage}${searchTerm != null ? `&q=${searchTerm}` : ''}`;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = await axiosInstance.get<any, AxiosResponse<ResponseTips>>(url, {});
 
-  const result = await axiosInstance.get<any, AxiosResponse<ResponseTips>>(url, {});
-
-  console.log('fetchRESULT', result);
-
-  // return result.data;
+    return result.data;
+  } catch (e) {
+    console.log('ERROR', e);
+  }
 
   return { rows: [], count: 0 };
 };
