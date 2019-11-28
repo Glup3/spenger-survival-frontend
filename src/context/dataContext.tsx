@@ -5,7 +5,11 @@ import ResponseTips from '../types/responseTips';
 import Tip from '../types/tip';
 import AddTipBody from '../types/add-tip-body';
 
-axios.interceptors.response.use(
+const axiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'localhost/api/v1',
+});
+
+axiosInstance.interceptors.response.use(
   (response: AxiosResponse<ResponseTips>) => {
     if (response.data.rows !== undefined) {
       for (let i = 0; i < response.data.rows.length; i++) {
@@ -49,17 +53,19 @@ const perPageDefault = 15;
 
 const fetchTips = async (searchTerm: string, offset = 0, perPage = perPageDefault): Promise<ResponseTips> => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const result = await axios.get<any, AxiosResponse<ResponseTips>>(
-    `${process.env.REACT_APP_BACKEND_URL}/tips?page=${offset}&perPage=${perPage}${
-      searchTerm != null ? `&q=${searchTerm}` : ''
-    }`
-  );
+  const url = `/tips?page=${offset}&perPage=${perPage}${searchTerm != null ? `&q=${searchTerm}` : ''}`;
 
-  return result.data;
+  const result = await axiosInstance.get<any, AxiosResponse<ResponseTips>>(url, {});
+
+  console.log('fetchRESULT', result);
+
+  // return result.data;
+
+  return { rows: [], count: 0 };
 };
 
 const addTip = async (tip: AddTipBody): Promise<boolean> => {
-  const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/tips`, tip);
+  const result = await axiosInstance.post('/tips', tip);
 
   if (result.status === 200) {
     return true;
@@ -69,7 +75,7 @@ const addTip = async (tip: AddTipBody): Promise<boolean> => {
 };
 
 const reportTip = async (id: number, title: string, message: string): Promise<void> => {
-  await axios.post(`${process.env.REACT_APP_BACKEND_URL}/tips/report`, {
+  await axiosInstance.post('/tips/report', {
     id,
     title,
     message,
