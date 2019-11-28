@@ -4,7 +4,7 @@ import AddTipPage from './AddTipPage';
 import DataPrivacyPage from './DataPrivacyPage';
 import HallOfFamePage from './HallOfFamePage';
 import ImprintPage from './ImprintPage';
-import AboutPage from './AboutPage';
+import FAQPage from './FAQPage';
 import SuccessfulAddTipPage from './SuccessfulAddTipPage';
 
 export {
@@ -14,6 +14,6 @@ export {
   DataPrivacyPage,
   HallOfFamePage,
   ImprintPage,
-  AboutPage,
+  FAQPage as AboutPage,
   SuccessfulAddTipPage,
 };

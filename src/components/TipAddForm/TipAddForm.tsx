@@ -121,7 +121,7 @@ const TipAddForm = () => {
               id="name"
               type="text"
               className="form-control"
-              placeholder="Leer --> Anonym"
+              placeholder="Anonym"
               value={nameValue}
               {...nameBind}
             />
@@ -145,7 +145,7 @@ const TipAddForm = () => {
               id="klasse"
               type="text"
               className="form-control"
-              placeholder="Leer --> Keine Angabe"
+              placeholder="Keine Angabe"
               value={schoolClassValue}
               {...schoolClassBind}
             />

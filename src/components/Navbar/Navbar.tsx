@@ -27,7 +27,7 @@ const Navbar = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <NavbarLink pathname={pathname} url="/about">
+          <NavbarLink pathname={pathname} url="/faq">
             FAQ
           </NavbarLink>
           <NavbarLink pathname={pathname} url="/tipp-abgeben">

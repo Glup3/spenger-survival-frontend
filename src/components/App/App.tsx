@@ -38,7 +38,7 @@ const App = () => {
               <Route path="/datenschutz" component={DataPrivacyPage} />
               <Route path="/hall-of-fame" component={HallOfFamePage} />
               <Route path="/impressum" component={ImprintPage} />
-              <Route path="/about" component={AboutPage} />
+              <Route path="/faq" component={AboutPage} />
               <Route component={NotFoundPage} />
             </Switch>
             <CookieConsent buttonText="Verstanden">

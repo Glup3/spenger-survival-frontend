@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import './QuestionAnswerCard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,7 +6,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 interface QuestionAnswerCardPropsType {
   question: string;
-  answer: string;
+  answer: ReactElement;
   keyTarget: string;
   group: string;
 }
@@ -26,7 +26,7 @@ const QuestionAnswerCard = ({ question, answer, keyTarget, group }: QuestionAnsw
         <FontAwesomeIcon className="float-right" icon={faChevronDown} />
       </h5>
       <div id={keyTarget} className="collapse" aria-labelledby={`heading-${keyTarget}`} data-parent={`#${group}`}>
-        <div className="card-body" dangerouslySetInnerHTML={{ __html: answer }}></div>
+        <div className="card-body">{answer}</div>
       </div>
     </div>
   );
