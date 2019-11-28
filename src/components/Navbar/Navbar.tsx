@@ -10,7 +10,7 @@ const Navbar = () => {
     <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-dark mb-4">
       <Link to="/" className="navbar-brand active">
         <SpengerSurvivalLogo />
-        <span className="ml-2">Spenger Survival</span>
+        <span className="ml-2 pr-3 pb-3">Spenger Survival</span>
       </Link>
 
       <button

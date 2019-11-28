@@ -25,7 +25,8 @@ export const helpers: Person[] = [
     name: 'David Herdlicka',
     title: 'UX Specialist',
     instagram: 'https://www.instagram.com/david.j_h/?hl=de',
-    image: `david.jpeg`,
+    image: 'david.jpeg',
+    linkedin: 'https://www.linkedin.com/in/david-herdlicka-6850a7195/',
   },
   {
     name: 'Daniel Strimitzer',
