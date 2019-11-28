@@ -28,6 +28,13 @@ export const helpers: Person[] = [
     image: `david.jpeg`,
   },
   {
+    name: 'Daniel Strimitzer',
+    title: 'Server hosted by STRIMCOM',
+    image: 'daniel.png',
+    instagram: 'https://www.instagram.com/strimi2000/',
+    linkedin: 'https://www.linkedin.com/in/daniel-strimitzer-9894b015a/?originalSubdomain=at',
+  },
+  {
     name: 'Maximilian Gaber',
     title: 'Designer',
     image: 'max.jpeg',
