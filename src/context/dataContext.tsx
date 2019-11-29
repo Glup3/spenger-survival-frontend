@@ -6,7 +6,7 @@ import Tip from '../types/tip';
 import AddTipBody from '../types/add-tip-body';
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:80/api/v1',
+  baseURL: process.env.REACT_APP_BACKEND_URL || '/api/v1',
 });
 
 axiosInstance.interceptors.response.use(
