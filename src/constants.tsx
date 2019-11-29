@@ -52,4 +52,11 @@ export const helpers: Person[] = [
     instagram: 'https://www.instagram.com/chris_t0l/',
     linkedin: 'https://www.linkedin.com/in/christopher-tolan-8a7789158/',
   },
+  {
+    name: 'Suvi Katoch',
+    title: 'Digital Consultant',
+    snapchat: 'suvisuvi',
+    instagram: 'https://www.instagram.com/suvi_suvi_suvi/',
+    image: 'suvi.jpeg',
+  },
 ];
