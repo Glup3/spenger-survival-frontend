@@ -59,4 +59,10 @@ export const helpers: Person[] = [
     instagram: 'https://www.instagram.com/suvi_suvi_suvi/',
     image: 'suvi.jpeg',
   },
+  {
+    name: 'Julian Luckenberger',
+    title: 'Design Artist',
+    instagram: 'https://www.instagram.com/julian_luckenberger/',
+    image: 'julian.jpeg',
+  },
 ];
