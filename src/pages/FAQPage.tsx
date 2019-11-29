@@ -9,7 +9,7 @@ const generalQuestions: QuestionAnswer[] = [
     question: 'Was ist Spenger Survival?',
     answer: (
       <>
-        Spenger Survival ist eine Plattform, wo man Tipps teilen kann. Diese Tipps sollen einem helfen die Spengergasse
+        Spenger Survival ist eine Plattform, wo man Tipps teilen kann. Diese Tipps sollen einem helfen, die Spengergasse
         zu überleben.
       </>
     ),
@@ -19,7 +19,7 @@ const generalQuestions: QuestionAnswer[] = [
     answer: (
       <>
         Allgemein ist diese Plattform für alle Spengergassler. Allerdings ist diese Plattform besonders an Erstklässler
-        gedacht, damit sie es gleich von Anfang an leichter in der Schule haben.
+        gerichtet, damit sie es gleich von Anfang an leichter in der Schule haben.
       </>
     ),
   },
@@ -91,7 +91,7 @@ const tipsQuestions: QuestionAnswer[] = [
   },
   {
     question: 'Brauche ich einen Account, um Tipps abzugeben?',
-    answer: <>Nein, man braucht keinen Account. Man kann nämlich alles Anonym angeben.</>,
+    answer: <>Nein, man braucht keinen Account. Man kann nämlich alles anonym angeben.</>,
   },
   {
     question: 'Wie ändere ich einen Tipp?',
@@ -147,7 +147,7 @@ const technologyQuestions: QuestionAnswer[] = [
         <a href="https://github.com/Glup3/spenger-survival-frontend" target="_blank" rel="noopener noreferrer">
           Github
         </a>{' '}
-        für mehr Informationen.
+        für weitere Informationen.
       </>
     ),
   },
@@ -157,7 +157,7 @@ const technologyQuestions: QuestionAnswer[] = [
   },
   {
     question: 'Womit ist das Backend gemacht worden?',
-    answer: <>Das Backend ist in NodeJS Typescript geschrieben und es wird ein ExpressJS Server verwendet</>,
+    answer: <>Das Backend ist in NodeJS Typescript geschrieben und es wird ein ExpressJS Server verwendet.</>,
   },
   {
     question: 'Welche Datenbank wurde verwendet?',
