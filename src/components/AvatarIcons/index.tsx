@@ -9,6 +9,8 @@ import TwitterIcon from './TwitterIcon';
 import YoutubeIcon from './YoutubeIcon';
 import StackOverflowIcon from './StackOverflowIcon';
 import GithubIcon from './GithubIcon';
+import GitlabIcon from './GitlabIcon';
+import SoundcloudIcon from './SoundcloudIcon';
 
 import './AvatarIcons.scss';
 
@@ -24,4 +26,6 @@ export {
   YoutubeIcon,
   StackOverflowIcon,
   GithubIcon,
+  GitlabIcon,
+  SoundcloudIcon,
 };

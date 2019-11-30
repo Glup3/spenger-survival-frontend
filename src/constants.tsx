@@ -20,20 +20,13 @@ export const developers: Person[] = [
   },
 ];
 
-export const helpers: Person[] = [
+export const moderators: Person[] = [
   {
     name: 'David Herdlicka',
     title: 'UX Specialist',
     instagram: 'https://www.instagram.com/david.j_h/?hl=de',
     image: 'david.jpeg',
     linkedin: 'https://www.linkedin.com/in/david-herdlicka-6850a7195/',
-  },
-  {
-    name: 'Daniel Strimitzer',
-    title: 'Server hosted by STRIMCOM',
-    image: 'daniel.png',
-    instagram: 'https://www.instagram.com/strimi2000/',
-    linkedin: 'https://www.linkedin.com/in/daniel-strimitzer-9894b015a/?originalSubdomain=at',
   },
   {
     name: 'Maximilian Gaber',
@@ -44,6 +37,16 @@ export const helpers: Person[] = [
     linkedin: 'https://www.linkedin.com/in/maximilian-gaber-143ba3197/',
     stackOverflow: 'https://stackoverflow.com/users/12347865/max',
   },
+];
+
+export const helpers: Person[] = [
+  {
+    name: 'Daniel Strimitzer',
+    title: 'Server hosted by STRIMCOM',
+    image: 'daniel.png',
+    instagram: 'https://www.instagram.com/strimi2000/',
+    linkedin: 'https://www.linkedin.com/in/daniel-strimitzer-9894b015a/?originalSubdomain=at',
+  },
   {
     name: 'Christopher Tolan',
     title: 'Art Director',
@@ -51,6 +54,16 @@ export const helpers: Person[] = [
     email: 'tol17717@spengergasse.at',
     instagram: 'https://www.instagram.com/chris_t0l/',
     linkedin: 'https://www.linkedin.com/in/christopher-tolan-8a7789158/',
+  },
+  {
+    name: 'Kevin Znaymer',
+    title: 'Contributor',
+    image: 'kevin.png',
+    instagram: 'https://www.instagram.com/kevin_znaymer/',
+    discord: 'OwerGrowen#9696',
+    linkedin: 'https://at.linkedin.com/in/kevin-znaymer-12a26a171?',
+    soundcloud: 'https://soundcloud.com/owergrowen',
+    gitlab: 'https://gitlab.com/OwerGrowen',
   },
   {
     name: 'Suvi Katoch',

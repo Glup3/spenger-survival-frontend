@@ -13,4 +13,6 @@ export default interface Person {
   discord?: string;
   paypal?: string;
   youtube?: string;
+  soundcloud?: string;
+  gitlab?: string;
 }

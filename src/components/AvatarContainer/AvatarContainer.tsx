@@ -12,6 +12,8 @@ import {
   YoutubeIcon,
   StackOverflowIcon,
   GithubIcon,
+  SoundcloudIcon,
+  GitlabIcon,
 } from '../AvatarIcons';
 import Person from '../../types/person';
 import AvatarImage from '../AvatarImage';
@@ -36,7 +38,9 @@ const AvatarContainer = ({ person }: AvatarContainerPropsType) => {
           {person.discord && <DiscordIcon name={person.discord} />}
           {person.paypal && <PaypalIcon link={person.paypal} />}
           {person.youtube && <YoutubeIcon link={person.youtube} />}
+          {person.soundcloud && <SoundcloudIcon link={person.soundcloud} />}
           {person.github && <GithubIcon link={person.github} />}
+          {person.gitlab && <GitlabIcon link={person.gitlab} />}
           {person.linkedin && <LinkedinIcon link={person.linkedin} />}
           {person.stackOverflow && <StackOverflowIcon link={person.stackOverflow} />}
         </div>
