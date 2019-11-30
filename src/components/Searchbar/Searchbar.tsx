@@ -4,6 +4,7 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useInput from '../../hooks/input-hook';
 import { useData } from '../../context/dataContext';
+import { isEmptyOrSpaces } from '../../util/string-helper';
 
 const Searchbar = () => {
   const { value, bind, reset } = useInput('');
@@ -13,6 +14,11 @@ const Searchbar = () => {
     e.preventDefault();
 
     data.fetchInitialTips(value);
+  };
+
+  const onClear = () => {
+    reset();
+    data.fetchInitialTips(null);
   };
 
   return (
@@ -34,16 +40,20 @@ const Searchbar = () => {
             </button>
           </div>
         )}
-        <div className="input-group-append">
-          {value === '' ? (
-            <button className="btn btn-outline-dark" type="submit">
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-          ) : (
-            <button className="btn btn-outline-primary" type="button" onClick={() => reset()}>
+        {!isEmptyOrSpaces(value) && (
+          <div className="input-group-append">
+            <button className="btn btn-outline-primary" type="button" onClick={onClear}>
               <FontAwesomeIcon icon={faTimes} />
             </button>
-          )}
+          </div>
+        )}
+        <div className="input-group-append">
+          <button
+            className={`btn ${isEmptyOrSpaces(value) ? 'btn-outline-dark' : 'btn-outline-primary'}`}
+            type="submit"
+          >
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
         </div>
       </div>
     </form>
