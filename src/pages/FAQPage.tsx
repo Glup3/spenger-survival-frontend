@@ -51,7 +51,7 @@ const generalQuestions: QuestionAnswer[] = [
           <li>
             Vorschläge an die Entwickler schicken (siehe <Link to="/hall-of-fame">Hall of Fame</Link>)
           </li>
-          <li> Spenger Survival anderen Spengergasslern weiterempfehlen :&rpar;</li>
+          <li> Spenger Survival anderen Spengergasslern weiterempfehlen :&#41;</li>
           <li>...</li>
         </ol>
       </>
