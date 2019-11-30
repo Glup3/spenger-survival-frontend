@@ -31,6 +31,7 @@ type AddTipType = (tip: AddTipBody) => Promise<boolean>;
 type ReportTipType = (id: number, title: string, message: string) => Promise<void>;
 type SetSelectedTipType = (value: Tip) => void;
 type SetVerifiedOptionType = (value: string) => void;
+type SendFeedbackType = (message: string, messageType: string) => Promise<void>;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,6 +50,7 @@ interface DataContextValuesType {
   isLoading: boolean;
   verifiedOption: string;
   setVerifiedOption: SetVerifiedOptionType;
+  sendFeedback: SendFeedbackType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -99,6 +101,13 @@ const reportTip = async (id: number, title: string, message: string): Promise<vo
   });
 };
 
+const sendFeedback = async (message: string, messageType: string): Promise<void> => {
+  axiosInstance.post('/feedbacks', {
+    message,
+    messageType,
+  });
+};
+
 export const DataProvider = (props: DataProviderPropsType) => {
   const [selectedTip, setSelectedTip] = useState<Tip>(null);
   const [tips, setTips] = useState<Tip[]>([]);
@@ -141,6 +150,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     isLoading,
     verifiedOption,
     setVerifiedOption,
+    sendFeedback,
   };
 
   return <DataContext.Provider value={value}>{props.children}</DataContext.Provider>;

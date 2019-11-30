@@ -155,12 +155,12 @@ const TipAddForm = () => {
             <select className="form-control" id="abteilung" value={departmentValue} {...departmentBind}>
               <option value="">Keine Angabe</option>
               <option value="Animation">Animation</option>
-              <option value="Betriebsinformatik">Betriebsinformatik</option>
               <option value="Biomedizin">Biomedizin</option>
               <option value="Fachschule Informatik">Fachschule Informatik</option>
               <option value="Gamedesign">Gamedesign</option>
               <option value="Interior- und Surfacedesign">Interior- und Surfacedesign</option>
               <option value="Informatik">Informatik</option>
+              <option value="Kolleg">Kolleg</option>
               <option value="Wirtschaft">Wirtschaft</option>
             </select>
           </div>
