@@ -4,6 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 import ResponseTips from '../types/responseTips';
 import Tip from '../types/tip';
 import AddTipBody from '../types/add-tip-body';
+import { isEmptyOrSpaces } from '../util/string-helper';
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL || '/api/v1',
@@ -28,7 +29,8 @@ type FetchInitialTipsType = (searchTerm: string) => void;
 type FetchMoreTipsType = (perPage?: number) => void;
 type AddTipType = (tip: AddTipBody) => Promise<boolean>;
 type ReportTipType = (id: number, title: string, message: string) => Promise<void>;
-type SetSelectedTip = (value: Tip) => void;
+type SetSelectedTipType = (value: Tip) => void;
+type SetVerifiedOptionType = (value: string) => void;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,17 +45,31 @@ interface DataContextValuesType {
   addTip: AddTipType;
   reportTip: ReportTipType;
   selectedTip: Tip;
-  setSelectedTip: SetSelectedTip;
+  setSelectedTip: SetSelectedTipType;
   isLoading: boolean;
+  verifiedOption: string;
+  setVerifiedOption: SetVerifiedOptionType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
 
 const perPageDefault = 15;
 
-const fetchTips = async (searchTerm: string, offset = 0, perPage = perPageDefault): Promise<ResponseTips> => {
+const fetchTips = async (
+  searchTerm: string,
+  verified: string,
+  offset = 0,
+  perPage = perPageDefault
+): Promise<ResponseTips> => {
   try {
-    const url = `/tips?page=${offset}&perPage=${perPage}${searchTerm != null ? `&q=${searchTerm}` : ''}`;
+    const urlStart = '/tips';
+    const urlPage = `?page=${offset}`;
+    const urlPerPage = `&perPage=${perPage}`;
+    const urlSearch = searchTerm != null ? `&q=${searchTerm}` : '';
+    const urlVerified = !isEmptyOrSpaces(verified) ? `&verified=${verified}` : '';
+
+    const url = urlStart + urlPage + urlPerPage + urlSearch + urlVerified;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = await axiosInstance.get<any, AxiosResponse<ResponseTips>>(url, {});
 
@@ -90,10 +106,11 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [searchInput, setSearchInput] = useState('');
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [verifiedOption, setVerifiedOption] = useState('');
 
   const fetchInitialTips = (searchTerm: string): void => {
     setIsLoading(true);
-    fetchTips(searchTerm).then(response => {
+    fetchTips(searchTerm, verifiedOption).then(response => {
       setPage(0);
       setIsLoading(false);
       setSearchInput(searchTerm);
@@ -104,7 +121,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
 
   const fetchMoreTips = (perPage = perPageDefault): void => {
     setIsLoading(true);
-    fetchTips(searchInput, page + 1, perPage).then(response => {
+    fetchTips(searchInput, verifiedOption, page + 1, perPage).then(response => {
       setPage(page + 1);
       setIsLoading(false);
       setTips(tips.concat(response.rows));
@@ -122,6 +139,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
     selectedTip,
     setSelectedTip,
     isLoading,
+    verifiedOption,
+    setVerifiedOption,
   };
 
   return <DataContext.Provider value={value}>{props.children}</DataContext.Provider>;

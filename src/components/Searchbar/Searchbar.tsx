@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useInput from '../../hooks/input-hook';
 import { useData } from '../../context/dataContext';
 import { isEmptyOrSpaces } from '../../util/string-helper';
+import VerifiedOptions from '../VerifiedOptions';
 
 const Searchbar = () => {
   const { value, bind, reset } = useInput('');
@@ -24,6 +25,9 @@ const Searchbar = () => {
   return (
     <form onSubmit={onSubmit}>
       <div className="input-group">
+        <div className="input-group-prepend mr-1">
+          <VerifiedOptions />
+        </div>
         <input
           className={`form-control ${value === '' ? 'border-dark' : 'border-primary'}`}
           type="text"
