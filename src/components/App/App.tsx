@@ -11,8 +11,9 @@ import {
   DataPrivacyPage,
   HallOfFamePage,
   ImprintPage,
-  AboutPage,
+  FAQPage,
   SuccessfulAddTipPage,
+  RequestPage,
 } from '../../pages';
 import { DataProvider } from '../../context/dataContext';
 import Navbar from '../Navbar';
@@ -38,7 +39,8 @@ const App = () => {
               <Route path="/datenschutz" component={DataPrivacyPage} />
               <Route path="/hall-of-fame" component={HallOfFamePage} />
               <Route path="/impressum" component={ImprintPage} />
-              <Route path="/faq" component={AboutPage} />
+              <Route path="/faq" component={FAQPage} />
+              <Route path="/feedback" component={RequestPage} />
               <Route component={NotFoundPage} />
             </Switch>
             <CookieConsent buttonText="Verstanden">

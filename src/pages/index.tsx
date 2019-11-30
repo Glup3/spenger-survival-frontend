@@ -6,6 +6,7 @@ import HallOfFamePage from './HallOfFamePage';
 import ImprintPage from './ImprintPage';
 import FAQPage from './FAQPage';
 import SuccessfulAddTipPage from './SuccessfulAddTipPage';
+import RequestPage from './RequestPage';
 
 export {
   HomePage,
@@ -14,6 +15,7 @@ export {
   DataPrivacyPage,
   HallOfFamePage,
   ImprintPage,
-  FAQPage as AboutPage,
+  FAQPage,
   SuccessfulAddTipPage,
+  RequestPage,
 };

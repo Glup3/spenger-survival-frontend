@@ -7,7 +7,7 @@ const Navbar = () => {
   const { pathname } = useLocation();
 
   return (
-    <nav className="navbar sticky-top navbar-expand-md navbar-dark bg-dark mb-4">
+    <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark mb-4">
       <Link to="/" className="navbar-brand active">
         <SpengerSurvivalLogo />
         <span className="ml-2 pr-3 pb-3">Spenger Survival</span>
@@ -38,6 +38,9 @@ const Navbar = () => {
           </NavbarLink>
         </ul>
         <ul className="navbar-nav">
+          <NavbarLink pathname={pathname} url="/feedback">
+            Feedback
+          </NavbarLink>
           <NavbarLink pathname={pathname} url="/datenschutz">
             Datenschutz
           </NavbarLink>
