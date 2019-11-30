@@ -51,7 +51,7 @@ const generalQuestions: QuestionAnswer[] = [
           <li>
             Vorschläge an die Entwickler schicken (siehe <Link to="/hall-of-fame">Hall of Fame</Link>)
           </li>
-          <li> Spenger Survival anderen Spengergasslern weiterempfehlen :)</li>
+          <li> Spenger Survival anderen Spengergasslern weiterempfehlen :&rpar;</li>
           <li>...</li>
         </ol>
       </>
@@ -109,6 +109,21 @@ const tipsQuestions: QuestionAnswer[] = [
     question: 'Wie wird ein Tipp verifiziert?',
     answer: (
       <>Ein Admin oder Moderator schaut sich den Tipp an und entscheidet dann ob er richtig beziehungsweise gut ist.</>
+    ),
+  },
+  {
+    question: 'Wieso gibt es die Klassen nicht als Liste zum Auswählen?',
+    answer: (
+      <>
+        Es gibt einfach viel zu viele Klassen und es ist schwer diese schön anzuzeigen. Da ist es einfacher, wenn man
+        die Klasse selber eingibt.
+      </>
+    ),
+  },
+  {
+    question: 'Wieso kann ich eine Klasse und Abteilung getrennt bzw. verschieden angeben?',
+    answer: (
+      <>Es wäre zu viel Aufwand gewesen, diese Logik zu implementieren. Deswegen kann man beides getrennt angeben.</>
     ),
   },
 ];
