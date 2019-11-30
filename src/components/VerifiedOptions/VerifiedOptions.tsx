@@ -12,8 +12,8 @@ const VerifiedOptions = () => {
       onChange={e => data.setVerifiedOption(e.target.value)}
     >
       <option value="">Alle</option>
-      <option value="true">Verifiziert</option>
-      <option value="false">Unverifiziert</option>
+      <option value="1">Verifiziert</option>
+      <option value="0">Unverifiziert</option>
     </select>
   );
 };
