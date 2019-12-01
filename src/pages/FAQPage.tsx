@@ -33,7 +33,7 @@ const generalQuestions: QuestionAnswer[] = [
     ),
   },
   {
-    question: 'Ist die Schule offiziel am Projekt beteiligt?',
+    question: 'Ist die Schule offiziell am Projekt beteiligt?',
     answer: <>Nein, die Schule ist derzeit nicht am Projekt beteiligt.</>,
   },
   {
@@ -52,7 +52,6 @@ const generalQuestions: QuestionAnswer[] = [
             Vorschläge an die Entwickler schicken (siehe <Link to="/hall-of-fame">Hall of Fame</Link>)
           </li>
           <li> Spenger Survival anderen Spengergasslern weiterempfehlen :&#41;</li>
-          <li>...</li>
         </ol>
       </>
     ),
@@ -79,10 +78,10 @@ const tipsQuestions: QuestionAnswer[] = [
       <>
         <p>Man kann folgende Dinge eingeben (Achte auf die Regeln):</p>
         <ul>
-          <li>Name - echter Name, künstler Name, oder Anonym</li>
+          <li>Name - echter Name, Künstlername, oder Anonym</li>
           <li>Geschlecht - männlich, weiblich, divers oder keine Angabe</li>
-          <li>Klasse - die Klasse in die du gehst</li>
-          <li>Abteilung - die Abteilung in die du gehst</li>
+          <li>Klasse - die Klasse, in die du gehst</li>
+          <li>Abteilung - die Abteilung, in die du gehst</li>
           <li>Titel - Überschrift von deinem Tipp</li>
           <li>Text - Kurze/Lange Beschreibung von deinem Tipp</li>
         </ul>
