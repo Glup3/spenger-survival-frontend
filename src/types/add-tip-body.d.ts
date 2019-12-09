@@ -1,4 +1,4 @@
-export default interface AddTipBody {
+interface AddTipBody {
   title: string;
   schoolClass: string;
   author: string;

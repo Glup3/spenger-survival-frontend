@@ -1,4 +1,4 @@
-export default interface Tip {
+interface Tip {
   id: number;
   author?: string;
   title: string;

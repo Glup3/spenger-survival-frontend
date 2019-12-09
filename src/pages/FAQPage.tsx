@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import QuestionAnswer from '../types/question-answer';
 import QuestionSection from '../components/QuestionSection';
 
 const generalQuestions: QuestionAnswer[] = [

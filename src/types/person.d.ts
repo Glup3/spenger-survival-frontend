@@ -1,6 +1,6 @@
-export default interface Person {
+interface Person {
   name: string;
-  image?: string;
+  image: string;
   title?: string;
   email?: string;
   instagram?: string;

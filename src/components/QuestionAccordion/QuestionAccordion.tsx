@@ -1,7 +1,6 @@
 import React from 'react';
 
 import QuestionAnswerCard from '../QuestionAnswerCard/QuestionAnswerCard';
-import QuestionAnswer from '../../types/question-answer';
 
 interface QuestionAccordionPropsType {
   questions: QuestionAnswer[];

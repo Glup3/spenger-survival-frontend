@@ -1,5 +1,3 @@
-import Person from './types/person';
-
 export const developers: Person[] = [
   {
     name: 'Phuc Tran',

@@ -15,7 +15,6 @@ import {
   SoundcloudIcon,
   GitlabIcon,
 } from '../AvatarIcons';
-import Person from '../../types/person';
 import AvatarImage from '../AvatarImage';
 
 interface AvatarContainerPropsType {

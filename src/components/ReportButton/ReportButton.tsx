@@ -1,12 +1,11 @@
-import React from 'react';
-import $ from 'jquery';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-regular-svg-icons';
+import React from "react";
+import $ from "jquery";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFlag } from "@fortawesome/free-regular-svg-icons";
 
-import Tip from '../../types/tip';
-import { useData } from '../../context/dataContext';
+import { useData } from "../../context/dataContext";
 
-import './ReportButton.scss';
+import "./ReportButton.scss";
 
 interface ReportButtonPropsType {
   tip: Tip;
@@ -17,11 +16,17 @@ const ReportButton = ({ tip }: ReportButtonPropsType) => {
 
   const onClick = () => {
     data.setSelectedTip(tip);
-    $('#reportModal').modal();
+    $("#reportModal").modal();
   };
 
   return (
-    <span onClick={onClick} className="report-flag" data-toggle="tooltip" data-placement="top" title="melden">
+    <span
+      onClick={onClick}
+      className="report-flag"
+      data-toggle="tooltip"
+      data-placement="top"
+      title="melden"
+    >
       <FontAwesomeIcon className="report-btn" icon={faFlag} size="sm" />
     </span>
   );

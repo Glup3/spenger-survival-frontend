@@ -1,9 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 
-import ResponseTips from '../types/responseTips';
-import Tip from '../types/tip';
-import AddTipBody from '../types/add-tip-body';
 import { isEmptyOrSpaces } from '../util/string-helper';
 
 const axiosInstance = axios.create({
@@ -32,6 +29,7 @@ type ReportTipType = (id: number, title: string, message: string) => Promise<voi
 type SetSelectedTipType = (value: Tip) => void;
 type SetVerifiedOptionType = (value: string) => void;
 type SendFeedbackType = (message: string, messageType: string) => Promise<void>;
+type GetAllTodosType = () => Promise<Todo[]>;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,6 +49,7 @@ interface DataContextValuesType {
   verifiedOption: string;
   setVerifiedOption: SetVerifiedOptionType;
   sendFeedback: SendFeedbackType;
+  getAllTodos: GetAllTodosType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -108,6 +107,10 @@ const sendFeedback = async (message: string, messageType: string): Promise<void>
   });
 };
 
+const getAllTodos = async (): Promise<Todo[]> => {
+  return axiosInstance.get('/todos').then(resp => resp.data);
+};
+
 export const DataProvider = (props: DataProviderPropsType) => {
   const [selectedTip, setSelectedTip] = useState<Tip>(null);
   const [tips, setTips] = useState<Tip[]>([]);
@@ -151,6 +154,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     verifiedOption,
     setVerifiedOption,
     sendFeedback,
+    getAllTodos,
   };
 
   return <DataContext.Provider value={value}>{props.children}</DataContext.Provider>;

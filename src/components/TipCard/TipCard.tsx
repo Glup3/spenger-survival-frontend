@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Tip from '../../types/tip';
 import GenderIcon from '../GenderIcon/GenderIcon';
 
 import './TipCard.scss';

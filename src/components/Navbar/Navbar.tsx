@@ -38,6 +38,9 @@ const Navbar = () => {
           </NavbarLink>
         </ul>
         <ul className="navbar-nav">
+          <NavbarLink pathname={pathname} url="/roadmap">
+            Roadmap
+          </NavbarLink>
           <NavbarLink pathname={pathname} url="/feedback">
             Feedback
           </NavbarLink>

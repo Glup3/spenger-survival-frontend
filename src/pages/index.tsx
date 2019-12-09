@@ -7,6 +7,7 @@ import ImprintPage from './ImprintPage';
 import FAQPage from './FAQPage';
 import SuccessfulAddTipPage from './SuccessfulAddTipPage';
 import RequestPage from './RequestPage';
+import TodoPage from './TodoPage';
 
 export {
   HomePage,
@@ -18,4 +19,5 @@ export {
   FAQPage,
   SuccessfulAddTipPage,
   RequestPage,
+  TodoPage,
 };

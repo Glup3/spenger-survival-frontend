@@ -2,7 +2,6 @@ import React from 'react';
 import StackGrid from 'react-stack-grid';
 
 import TipCard from '../TipCard';
-import Tip from '../../types/tip';
 
 interface TipsGridPropsType {
   tips: Tip[];

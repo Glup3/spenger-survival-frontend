@@ -1,6 +1,4 @@
-import { ReactElement } from 'react';
-
-export default interface QuestionAnswer {
+interface QuestionAnswer {
   question: string;
   answer: ReactElement;
 }

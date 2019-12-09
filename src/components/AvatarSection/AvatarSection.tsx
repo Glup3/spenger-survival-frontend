@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Person from '../../types/person';
 import AvatarContainer from '../AvatarContainer';
 
 interface AvatarSectionPropsType {

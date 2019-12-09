@@ -14,6 +14,7 @@ import {
   FAQPage,
   SuccessfulAddTipPage,
   RequestPage,
+  TodoPage,
 } from '../../pages';
 import { DataProvider } from '../../context/dataContext';
 import Navbar from '../Navbar';
@@ -41,6 +42,7 @@ const App = () => {
               <Route path="/impressum" component={ImprintPage} />
               <Route path="/faq" component={FAQPage} />
               <Route path="/feedback" component={RequestPage} />
+              <Route path="/roadmap" component={TodoPage} />
               <Route component={NotFoundPage} />
             </Switch>
             <CookieConsent buttonText="Verstanden">
