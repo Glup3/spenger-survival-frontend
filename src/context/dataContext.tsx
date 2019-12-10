@@ -1,26 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
 
-import { isEmptyOrSpaces } from '../util/string-helper';
-
-const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL || '/api/v1',
-});
-
-axiosInstance.interceptors.response.use(
-  (response: AxiosResponse<ResponseTips>) => {
-    if (response.data.rows !== undefined) {
-      for (let i = 0; i < response.data.rows.length; i++) {
-        response.data.rows[i].issueDate = new Date(response.data.rows[i].issueDate);
-      }
-    }
-
-    return response;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
+import { fetchTips, reportTip, addTip } from '../data/tipService';
+import { sendFeedback } from '../data/feedbackService';
+import { getAllTodos } from '../data/todoService';
 
 type FetchInitialTipsType = (searchTerm: string) => void;
 type FetchMoreTipsType = (perPage?: number) => void;
@@ -54,63 +36,6 @@ interface DataContextValuesType {
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
 
-const perPageDefault = 15;
-
-const fetchTips = async (
-  searchTerm: string,
-  verified: string,
-  offset = 0,
-  perPage = perPageDefault
-): Promise<ResponseTips> => {
-  try {
-    const urlStart = '/tips';
-    const urlPage = `?page=${offset}`;
-    const urlPerPage = `&perPage=${perPage}`;
-    const urlSearch = searchTerm != null ? `&q=${searchTerm}` : '';
-    const urlVerified = !isEmptyOrSpaces(verified) ? `&verified=${verified}` : '';
-
-    const url = urlStart + urlPage + urlPerPage + urlSearch + urlVerified;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result = await axiosInstance.get<any, AxiosResponse<ResponseTips>>(url, {});
-
-    return result.data;
-  } catch (e) {
-    console.log('ERROR', e);
-  }
-
-  return { rows: [], count: 0 };
-};
-
-const addTip = async (tip: AddTipBody): Promise<boolean> => {
-  const result = await axiosInstance.post('/tips', tip);
-
-  if (result.status === 200) {
-    return true;
-  }
-
-  return false;
-};
-
-const reportTip = async (id: number, title: string, message: string): Promise<void> => {
-  await axiosInstance.post('/tips/report', {
-    id,
-    title,
-    message,
-  });
-};
-
-const sendFeedback = async (message: string, messageType: string): Promise<void> => {
-  axiosInstance.post('/feedbacks', {
-    message,
-    messageType,
-  });
-};
-
-const getAllTodos = async (): Promise<Todo[]> => {
-  return axiosInstance.get('/todos').then(resp => resp.data);
-};
-
 export const DataProvider = (props: DataProviderPropsType) => {
   const [selectedTip, setSelectedTip] = useState<Tip>(null);
   const [tips, setTips] = useState<Tip[]>([]);
@@ -131,7 +56,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     });
   };
 
-  const fetchMoreTips = (perPage = perPageDefault): void => {
+  const fetchMoreTips = (perPage = 15): void => {
     setIsLoading(true);
     fetchTips(searchInput, verifiedOption, page + 1, perPage).then(response => {
       setPage(page + 1);
