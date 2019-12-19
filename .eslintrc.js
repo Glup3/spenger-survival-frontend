@@ -13,7 +13,8 @@ module.exports = {
     'import/no-cycle': 'off',
     'no-underscore-dangle': 'off',
     'prettier/prettier': 'error',
-    'no-plusplus': 'off'
+    'no-plusplus': 'off',
+    'prefer-destructuring': ['error', { object: true, array: false }]
   },
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features

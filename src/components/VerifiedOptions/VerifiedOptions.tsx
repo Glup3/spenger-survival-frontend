@@ -1,20 +1,33 @@
 import React from 'react';
+import DropdownSelect from 'react-dropdown-select';
+
 import { useData } from '../../context/dataContext';
 
 const VerifiedOptions = () => {
   const data = useData();
 
+  const options: DropdownSelectOption[] = [
+    { label: 'Alle', value: '' },
+    { label: 'Verifiziert', value: '1' },
+    { label: 'Unverifiziert', value: '0' },
+  ];
+
+  const onChange = (values: DropdownSelectOption[]) => {
+    data.changeSearchOptionsAndSearch(values[0]);
+  };
+
   return (
-    <select
-      className="form-control"
-      id="verifiedOptions"
-      value={data.verifiedOption}
-      onChange={e => data.setVerifiedOption(e.target.value)}
-    >
-      <option value="">Alle</option>
-      <option value="1">Verifiziert</option>
-      <option value="0">Unverifiziert</option>
-    </select>
+    <div className="form-group">
+      <label htmlFor="verifiedSelect">Verifizierung</label>
+      <DropdownSelect
+        id="verifiedSelect"
+        searchable={true}
+        closeOnScroll={true}
+        options={options}
+        values={[options[0]]}
+        onChange={onChange}
+      />
+    </div>
   );
 };
 

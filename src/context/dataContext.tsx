@@ -9,9 +9,10 @@ type FetchMoreTipsType = (perPage?: number) => void;
 type AddTipType = (tip: AddTipBody) => Promise<boolean>;
 type ReportTipType = (id: number, title: string, message: string) => Promise<void>;
 type SetSelectedTipType = (value: Tip) => void;
-type SetVerifiedOptionType = (value: string) => void;
+type SetVerifiedOptionType = (value: DropdownSelectOption) => void;
 type SendFeedbackType = (message: string, messageType: string) => Promise<void>;
 type GetAllTodosType = () => Promise<Todo[]>;
+type ChangeSearchOptionsAndSearchType = (value) => void;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,10 +29,10 @@ interface DataContextValuesType {
   selectedTip: Tip;
   setSelectedTip: SetSelectedTipType;
   isLoading: boolean;
-  verifiedOption: string;
-  setVerifiedOption: SetVerifiedOptionType;
+  verifiedOption: DropdownSelectOption;
   sendFeedback: SendFeedbackType;
   getAllTodos: GetAllTodosType;
+  changeSearchOptionsAndSearch: ChangeSearchOptionsAndSearchType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -43,11 +44,12 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [searchInput, setSearchInput] = useState('');
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [verifiedOption, setVerifiedOption] = useState('');
+
+  let verifiedOption: DropdownSelectOption = { label: 'Alle', value: '' };
 
   const fetchInitialTips = (searchTerm: string): void => {
     setIsLoading(true);
-    fetchTips(searchTerm, verifiedOption).then(response => {
+    fetchTips(searchTerm, verifiedOption.value).then(response => {
       setPage(0);
       setIsLoading(false);
       setSearchInput(searchTerm);
@@ -58,7 +60,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
 
   const fetchMoreTips = (perPage = 15): void => {
     setIsLoading(true);
-    fetchTips(searchInput, verifiedOption, page + 1, perPage).then(response => {
+    fetchTips(searchInput, verifiedOption.value, page + 1, perPage).then(response => {
       setPage(page + 1);
       setIsLoading(false);
       setTips(tips.concat(response.rows));
@@ -66,7 +68,15 @@ export const DataProvider = (props: DataProviderPropsType) => {
     });
   };
 
-  const value = {
+  const changeSearchOptionsAndSearch = value => {
+    if (value != null) {
+      verifiedOption = value;
+    }
+
+    fetchInitialTips(searchInput);
+  };
+
+  const valueTips = {
     tips,
     tipsCount,
     fetchInitialTips,
@@ -75,9 +85,13 @@ export const DataProvider = (props: DataProviderPropsType) => {
     reportTip,
     selectedTip,
     setSelectedTip,
+  };
+
+  const value = {
+    ...valueTips,
     isLoading,
     verifiedOption,
-    setVerifiedOption,
+    changeSearchOptionsAndSearch,
     sendFeedback,
     getAllTodos,
   };
