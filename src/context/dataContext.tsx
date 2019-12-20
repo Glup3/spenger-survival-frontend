@@ -19,6 +19,7 @@ type GetAllTodosType = () => Promise<Todo[]>;
 
 type SetDepartmentOptionType = (value: DropdownSelectOption) => void;
 type SetVerifiedOptionType = (value: DropdownSelectOption) => void;
+type SetGenderOptionType = (value: DropdownSelectOption) => void;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,13 +36,16 @@ interface DataContextValuesType {
   selectedTip: Tip;
   setSelectedTip: SetSelectedTipType;
   isLoading: boolean;
-  verifiedOption: DropdownSelectOption;
-  departmentOption: DropdownSelectOption;
   sendFeedback: SendFeedbackType;
   getAllTodos: GetAllTodosType;
 
+  verifiedOption: DropdownSelectOption;
+  departmentOption: DropdownSelectOption;
+  genderOption: DropdownSelectOption;
+
   setVerifiedOption: SetVerifiedOptionType;
   setDepartmentOption: SetDepartmentOptionType;
+  setGenderOption: SetGenderOptionType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -56,6 +60,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
 
   const [verifiedOption, setVerifiedOption] = useState<DropdownSelectOption>({ label: 'Alle', value: null });
   const [departmentOption, setDepartmentOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
+  const [genderOption, setGenderOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
 
   const fetchInitialTips = (searchTerm: string): void => {
     setIsLoading(true);
@@ -64,6 +69,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
       searchTerm,
       verified: verifiedOption.value,
       department: departmentOption.value,
+      gender: genderOption.value,
     }).then(response => {
       setPage(0);
       setIsLoading(false);
@@ -78,6 +84,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
     fetchTips({
       searchTerm: searchInput,
       verified: verifiedOption.value,
+      department: verifiedOption.value,
+      gender: genderOption.value,
       offset: page + 1,
       perPage,
     }).then(response => {
@@ -104,6 +112,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
     setVerifiedOption,
     departmentOption,
     setDepartmentOption,
+    genderOption,
+    setGenderOption,
   };
 
   const value = {

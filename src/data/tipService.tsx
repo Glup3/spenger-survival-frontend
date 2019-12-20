@@ -4,8 +4,9 @@ import { axiosInstance } from './axios';
 
 interface FetchTipsArgs {
   searchTerm: string;
-  verified?: string;
-  department?: string;
+  verified: string;
+  department: string;
+  gender: string;
   offset?: number;
   perPage?: number;
 }
@@ -14,6 +15,7 @@ export const fetchTips = async ({
   searchTerm,
   verified,
   department,
+  gender,
   offset = 0,
   perPage = 15,
 }: FetchTipsArgs): Promise<ResponseTips> => {
@@ -25,6 +27,7 @@ export const fetchTips = async ({
       searchTerm,
       verified,
       department,
+      gender,
     });
 
     return result.data;

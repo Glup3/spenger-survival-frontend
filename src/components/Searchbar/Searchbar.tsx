@@ -7,6 +7,7 @@ import { useData } from '../../context/dataContext';
 import { isEmptyOrSpaces } from '../../util/string-helper';
 import SelectVerified from '../DropdownSelects/SelectVerified';
 import SelectDepartment from '../DropdownSelects/SelectDepartment';
+import SelectGender from '../DropdownSelects/SelectGender';
 
 const Searchbar = () => {
   const { value, bind, reset } = useInput('');
@@ -27,6 +28,7 @@ const Searchbar = () => {
     <div>
       <SelectVerified />
       <SelectDepartment />
+      <SelectGender />
       <form onSubmit={onSubmit}>
         <div className="input-group">
           <input
