@@ -6,15 +6,6 @@ import useInput from '../../hooks/input-hook';
 import { useData } from '../../context/dataContext';
 import { isEmptyOrSpaces } from '../../util/string-helper';
 
-import SelectVerified from '../DropdownSelects/SelectVerified';
-import SelectDepartment from '../DropdownSelects/SelectDepartment';
-import SelectGender from '../DropdownSelects/SelectGender';
-import SelectCategory from '../DropdownSelects/SelectCategory';
-import SelectAmount from '../DropdownSelects/SelectAmount';
-import SelectOrderBy from '../DropdownSelects/SelectOrderBy';
-import SelectSchoolClass from '../DropdownSelects/SelectSchoolClass';
-import SelectAuthor from '../DropdownSelects/SelectAuthor';
-
 const Searchbar = () => {
   const { value, bind, reset } = useInput('');
   const data = useData();
@@ -32,20 +23,12 @@ const Searchbar = () => {
 
   return (
     <div>
-      <SelectVerified />
-      <SelectDepartment />
-      <SelectGender />
-      <SelectCategory />
-      <SelectAmount />
-      <SelectOrderBy />
-      <SelectSchoolClass />
-      <SelectAuthor />
       <form onSubmit={onSubmit}>
         <div className="input-group">
           <input
             className={`form-control ${value === '' ? 'border-dark' : 'border-primary'}`}
             type="text"
-            placeholder="Titel / Beschreibung / Klasse / Autor / Abteilung  suchen..."
+            placeholder="Textsuchen..."
             aria-label="Search"
             {...bind}
           />

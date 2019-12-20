@@ -4,7 +4,7 @@ import { useData } from '../../context/dataContext';
 const TipsCounter = () => {
   const data = useData();
 
-  return <h6 className="mt-2">Tipps gefunden: {data.tipsCount}</h6>;
+  return <h5 className="mt-2">Tipps gefunden: {data.tipsCount}</h5>;
 };
 
 export default TipsCounter;

@@ -23,7 +23,7 @@ const SelectAmount = () => {
       <label htmlFor="amountSelect">Tipps pro Seite</label>
       <DropdownSelect
         id="amountSelect"
-        searchable={true}
+        searchable={false}
         closeOnScroll={true}
         options={options}
         values={[data.amountOption]}

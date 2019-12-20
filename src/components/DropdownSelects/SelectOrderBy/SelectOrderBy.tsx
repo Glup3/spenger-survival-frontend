@@ -20,7 +20,7 @@ const SelectOrderBy = () => {
       <label htmlFor="orderBySelect">Datum</label>
       <DropdownSelect
         id="orderBySelect"
-        searchable={true}
+        searchable={false}
         closeOnScroll={true}
         options={options}
         values={[data.orderByOption]}

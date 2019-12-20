@@ -21,7 +21,7 @@ const SelectVerified = () => {
       <label htmlFor="verifiedSelect">Verifizierung</label>
       <DropdownSelect
         id="verifiedSelect"
-        searchable={true}
+        searchable={false}
         closeOnScroll={true}
         options={options}
         values={[options[0]]}
