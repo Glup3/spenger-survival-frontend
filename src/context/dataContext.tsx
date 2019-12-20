@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-import { fetchTips, reportTip, addTip, fetchSchoolClasses } from '../data/tipService';
+import { fetchTips, reportTip, addTip, fetchSchoolClasses, fetchAuthors } from '../data/tipService';
 import { sendFeedback } from '../data/feedbackService';
 import { getAllTodos } from '../data/todoService';
 import { getAllCategories } from '../data/categoryService';
@@ -25,6 +25,7 @@ type SetCategoryOptionType = (value: DropdownSelectOption) => void;
 type SetAmountOptionType = (value: DropdownSelectOption) => void;
 type SetOrderByOptionType = (value: DropdownSelectOption) => void;
 type SetSchoolClassOptionType = (value: DropdownSelectOption) => void;
+type SetAuthorOptionType = (value: DropdownSelectOption) => void;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,6 +46,7 @@ interface DataContextValuesType {
   getAllTodos: GetAllTodosType;
   allCategories: DropdownSelectOption[];
   allSchoolClasses: DropdownSelectOption[];
+  allAuthors: DropdownSelectOption[];
 
   verifiedOption: DropdownSelectOption;
   departmentOption: DropdownSelectOption;
@@ -53,6 +55,7 @@ interface DataContextValuesType {
   amountOption: DropdownSelectOption;
   orderByOption: DropdownSelectOption;
   schoolClassOption: DropdownSelectOption;
+  authorOption: DropdownSelectOption;
 
   setVerifiedOption: SetVerifiedOptionType;
   setDepartmentOption: SetDepartmentOptionType;
@@ -61,6 +64,7 @@ interface DataContextValuesType {
   setAmountOption: SetAmountOptionType;
   setOrderByOption: SetOrderByOptionType;
   setSchoolClassOption: SetSchoolClassOptionType;
+  setAuthorOption: SetAuthorOptionType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -82,11 +86,14 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [orderByOption, setOrderByOption] = useState<DropdownSelectOption>({ label: 'Neueste', value: 'DESC' });
   const [schoolClassOption, setSchoolClassOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
   const [allSchoolClasses, setAllSchoolClasses] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: '' }]);
+  const [authorOption, setAuthorOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
+  const [allAuthors, setAllAuthors] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: '' }]);
 
   useEffect(() => {
     const fetchCategories = async () => {
       const fetchedCategories = await getAllCategories();
       const fetchedSchoolClasses = await fetchSchoolClasses();
+      const fetchedAuthors = await fetchAuthors();
 
       const modifiedCategories = fetchedCategories.map<DropdownSelectOption>(category => {
         return {
@@ -100,9 +107,16 @@ export const DataProvider = (props: DataProviderPropsType) => {
           value: schoolClass.schoolClass,
         };
       });
+      const modifiedAuthors = fetchedAuthors.map<DropdownSelectOption>(author => {
+        return {
+          label: author.author || 'Anonym',
+          value: author.author,
+        };
+      });
 
       setAllCategories(allCategories.concat(modifiedCategories));
       setAllSchoolClasses(allSchoolClasses.concat(modifiedSchoolClasses));
+      setAllAuthors(allAuthors.concat(modifiedAuthors));
     };
 
     fetchCategories();
@@ -119,6 +133,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
       gender: genderOption.value,
       category: categoryOption.value,
       schoolClass: schoolClassOption.value,
+      author: authorOption.value,
       perPage: parseInt(amountOption.value, 10),
       orderBy: orderByOption.value,
     }).then(response => {
@@ -139,6 +154,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
       gender: genderOption.value,
       category: categoryOption.value,
       schoolClass: schoolClassOption.value,
+      author: authorOption.value,
       perPage: parseInt(amountOption.value, 10),
       offset: page + 1,
       orderBy: orderByOption.value,
@@ -176,6 +192,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
     setOrderByOption,
     schoolClassOption,
     setSchoolClassOption,
+    authorOption,
+    setAuthorOption,
   };
 
   const value = {
@@ -183,6 +201,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     ...valueTipsOptions,
     allCategories,
     allSchoolClasses,
+    allAuthors,
     isLoading,
     verifiedOption,
     sendFeedback,
