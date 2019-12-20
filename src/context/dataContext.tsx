@@ -23,6 +23,7 @@ type SetVerifiedOptionType = (value: DropdownSelectOption) => void;
 type SetGenderOptionType = (value: DropdownSelectOption) => void;
 type SetCategoryOptionType = (value: DropdownSelectOption) => void;
 type SetAmountOptionType = (value: DropdownSelectOption) => void;
+type SetOrderByOptionType = (value: DropdownSelectOption) => void;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -48,12 +49,14 @@ interface DataContextValuesType {
   genderOption: DropdownSelectOption;
   categoryOption: DropdownSelectOption;
   amountOption: DropdownSelectOption;
+  orderByOption: DropdownSelectOption;
 
   setVerifiedOption: SetVerifiedOptionType;
   setDepartmentOption: SetDepartmentOptionType;
   setGenderOption: SetGenderOptionType;
   setCategoryOption: SetCategoryOptionType;
   setAmountOption: SetAmountOptionType;
+  setOrderByOption: SetOrderByOptionType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -72,6 +75,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [categoryOption, setCategoryOption] = useState<DropdownSelectOption>({ label: 'Alle', value: null });
   const [allCategories, setAllCategories] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: null }]);
   const [amountOption, setAmountOption] = useState<DropdownSelectOption>({ label: '15', value: '15' });
+  const [orderByOption, setOrderByOption] = useState<DropdownSelectOption>({ label: 'Neueste', value: 'DESC' });
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -99,6 +103,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
       gender: genderOption.value,
       category: categoryOption.value,
       perPage: parseInt(amountOption.value, 10),
+      orderBy: orderByOption.value,
     }).then(response => {
       setPage(0);
       setIsLoading(false);
@@ -118,9 +123,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
       category: categoryOption.value,
       perPage: parseInt(amountOption.value, 10),
       offset: page + 1,
+      orderBy: orderByOption.value,
     }).then(response => {
-      console.log('resppp', response);
-
       setPage(page + 1);
       setIsLoading(false);
       setTips(tips.concat(response.rows));
@@ -150,6 +154,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
     setCategoryOption,
     amountOption,
     setAmountOption,
+    orderByOption,
+    setOrderByOption,
   };
 
   const value = {

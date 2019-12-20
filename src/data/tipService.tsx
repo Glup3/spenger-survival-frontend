@@ -10,6 +10,7 @@ interface FetchTipsArgs {
   category: string;
   offset?: number;
   perPage?: number;
+  orderBy: string;
 }
 
 export const fetchTips = async ({
@@ -20,6 +21,7 @@ export const fetchTips = async ({
   category,
   offset = 0,
   perPage = 15,
+  orderBy,
 }: FetchTipsArgs): Promise<ResponseTips> => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,6 +33,7 @@ export const fetchTips = async ({
       department,
       gender,
       category,
+      orderBy,
     });
 
     return result.data;
