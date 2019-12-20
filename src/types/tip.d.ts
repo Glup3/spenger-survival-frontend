@@ -8,4 +8,5 @@ interface Tip {
   issueDate: Date;
   verified: boolean;
   gender?: string;
+  category?: Category;
 }

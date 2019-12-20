@@ -7,6 +7,7 @@ interface FetchTipsArgs {
   verified: string;
   department: string;
   gender: string;
+  category: string;
   offset?: number;
   perPage?: number;
 }
@@ -16,6 +17,7 @@ export const fetchTips = async ({
   verified,
   department,
   gender,
+  category,
   offset = 0,
   perPage = 15,
 }: FetchTipsArgs): Promise<ResponseTips> => {
@@ -28,6 +30,7 @@ export const fetchTips = async ({
       verified,
       department,
       gender,
+      category,
     });
 
     return result.data;
