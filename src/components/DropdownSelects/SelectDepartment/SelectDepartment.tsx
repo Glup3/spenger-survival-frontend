@@ -7,7 +7,8 @@ const SelectDepartment = () => {
   const data = useData();
 
   const options: DropdownSelectOption[] = [
-    { label: '', value: 'Alle' },
+    { label: 'Alle', value: '' },
+    { label: 'Abteilungslos', value: null },
     { label: 'Animation', value: 'Animation' },
     { label: 'Biomedizin', value: 'Biomedizin' },
     { label: 'Fachschule Informatik', value: 'Fachschule Informatik' },

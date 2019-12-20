@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 
 import { axiosInstance } from './axios';
-import { isEmptyOrSpaces } from '../util/string-helper';
 
 interface FetchTipsArgs {
   searchTerm: string;
@@ -19,16 +18,14 @@ export const fetchTips = async ({
   perPage = 15,
 }: FetchTipsArgs): Promise<ResponseTips> => {
   try {
-    const urlStart = '/tips';
-    const urlPage = `?page=${offset}`;
-    const urlPerPage = `&perPage=${perPage}`;
-    const urlSearch = searchTerm != null ? `&q=${searchTerm}` : '';
-    const urlVerified = !isEmptyOrSpaces(verified) ? `&verified=${verified}` : '';
-
-    const url = urlStart + urlPage + urlPerPage + urlSearch + urlVerified;
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result = await axiosInstance.get<any, AxiosResponse<ResponseTips>>(url, {});
+    const result = await axiosInstance.post<any, AxiosResponse<ResponseTips>>('/tips', {
+      page: offset,
+      perPage,
+      searchTerm,
+      verified,
+      department,
+    });
 
     return result.data;
   } catch (e) {
@@ -39,7 +36,7 @@ export const fetchTips = async ({
 };
 
 export const addTip = async (tip: AddTipBody): Promise<boolean> => {
-  const result = await axiosInstance.post('/tips', tip);
+  const result = await axiosInstance.post('/tips/add', tip);
 
   if (result.status === 200) {
     return true;

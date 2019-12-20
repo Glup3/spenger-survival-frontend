@@ -54,8 +54,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [verifiedOption, setVerifiedOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
-  const [departmentOption, setDepartmentOption] = useState<DropdownSelectOption>({ label: 'Alle', value: null });
+  const [verifiedOption, setVerifiedOption] = useState<DropdownSelectOption>({ label: 'Alle', value: null });
+  const [departmentOption, setDepartmentOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
 
   const fetchInitialTips = (searchTerm: string): void => {
     setIsLoading(true);

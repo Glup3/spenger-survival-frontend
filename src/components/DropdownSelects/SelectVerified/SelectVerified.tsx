@@ -7,7 +7,7 @@ const SelectVerified = () => {
   const data = useData();
 
   const options: DropdownSelectOption[] = [
-    { label: 'Alle', value: '' },
+    { label: 'Alle', value: null },
     { label: 'Verifiziert', value: '1' },
     { label: 'Unverifiziert', value: '0' },
   ];
