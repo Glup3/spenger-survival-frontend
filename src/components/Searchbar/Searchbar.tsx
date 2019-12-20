@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useInput from '../../hooks/input-hook';
 import { useData } from '../../context/dataContext';
 import { isEmptyOrSpaces } from '../../util/string-helper';
-import VerifiedOptions from '../VerifiedOptions';
+import SelectVerified from '../DropdownSelects/SelectVerified';
+import SelectDepartment from '../DropdownSelects/SelectDepartment';
 
 const Searchbar = () => {
   const { value, bind, reset } = useInput('');
@@ -23,44 +24,45 @@ const Searchbar = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <div className="input-group">
-        <div className="input-group-prepend mr-1">
-          <VerifiedOptions />
-        </div>
-        <input
-          className={`form-control ${value === '' ? 'border-dark' : 'border-primary'}`}
-          type="text"
-          placeholder="Titel / Beschreibung / Klasse / Autor / Abteilung  suchen..."
-          aria-label="Search"
-          {...bind}
-        />
-        {data.isLoading && (
+    <div>
+      <SelectVerified />
+      <SelectDepartment />
+      <form onSubmit={onSubmit}>
+        <div className="input-group">
+          <input
+            className={`form-control ${value === '' ? 'border-dark' : 'border-primary'}`}
+            type="text"
+            placeholder="Titel / Beschreibung / Klasse / Autor / Abteilung  suchen..."
+            aria-label="Search"
+            {...bind}
+          />
+          {data.isLoading && (
+            <div className="input-group-append">
+              <button className="btn btn-outline-primary">
+                <div className="spinner-border spinner-border-sm text-primary" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </button>
+            </div>
+          )}
+          {!isEmptyOrSpaces(value) && (
+            <div className="input-group-append">
+              <button className="btn btn-outline-primary" type="button" onClick={onClear}>
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+            </div>
+          )}
           <div className="input-group-append">
-            <button className="btn btn-outline-primary">
-              <div className="spinner-border spinner-border-sm text-primary" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
+            <button
+              className={`btn ${isEmptyOrSpaces(value) ? 'btn-outline-dark' : 'btn-outline-primary'}`}
+              type="submit"
+            >
+              <FontAwesomeIcon icon={faSearch} />
             </button>
           </div>
-        )}
-        {!isEmptyOrSpaces(value) && (
-          <div className="input-group-append">
-            <button className="btn btn-outline-primary" type="button" onClick={onClear}>
-              <FontAwesomeIcon icon={faTimes} />
-            </button>
-          </div>
-        )}
-        <div className="input-group-append">
-          <button
-            className={`btn ${isEmptyOrSpaces(value) ? 'btn-outline-dark' : 'btn-outline-primary'}`}
-            type="submit"
-          >
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

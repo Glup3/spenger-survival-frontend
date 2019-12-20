@@ -3,12 +3,21 @@ import { AxiosResponse } from 'axios';
 import { axiosInstance } from './axios';
 import { isEmptyOrSpaces } from '../util/string-helper';
 
-export const fetchTips = async (
-  searchTerm: string,
-  verified: string,
+interface FetchTipsArgs {
+  searchTerm: string;
+  verified?: string;
+  department?: string;
+  offset?: number;
+  perPage?: number;
+}
+
+export const fetchTips = async ({
+  searchTerm,
+  verified,
+  department,
   offset = 0,
-  perPage = 15
-): Promise<ResponseTips> => {
+  perPage = 15,
+}: FetchTipsArgs): Promise<ResponseTips> => {
   try {
     const urlStart = '/tips';
     const urlPage = `?page=${offset}`;

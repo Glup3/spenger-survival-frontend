@@ -1,9 +1,9 @@
 import React from 'react';
 import DropdownSelect from 'react-dropdown-select';
 
-import { useData } from '../../context/dataContext';
+import { useData } from '../../../context/dataContext';
 
-const VerifiedOptions = () => {
+const SelectVerified = () => {
   const data = useData();
 
   const options: DropdownSelectOption[] = [
@@ -13,7 +13,7 @@ const VerifiedOptions = () => {
   ];
 
   const onChange = (values: DropdownSelectOption[]) => {
-    data.changeSearchOptionsAndSearch(values[0]);
+    data.setVerifiedOption(values[0]);
   };
 
   return (
@@ -31,4 +31,4 @@ const VerifiedOptions = () => {
   );
 };
 
-export default VerifiedOptions;
+export default SelectVerified;
