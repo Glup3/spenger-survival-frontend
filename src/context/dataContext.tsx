@@ -109,7 +109,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     fetchTips({
       searchTerm: searchInput,
       verified: verifiedOption.value,
-      department: verifiedOption.value,
+      department: departmentOption.value,
       gender: genderOption.value,
       category: categoryOption.value,
       offset: page + 1,
