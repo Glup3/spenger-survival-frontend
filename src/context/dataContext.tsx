@@ -22,6 +22,7 @@ type SetDepartmentOptionType = (value: DropdownSelectOption) => void;
 type SetVerifiedOptionType = (value: DropdownSelectOption) => void;
 type SetGenderOptionType = (value: DropdownSelectOption) => void;
 type SetCategoryOptionType = (value: DropdownSelectOption) => void;
+type SetAmountOptionType = (value: DropdownSelectOption) => void;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,11 +47,13 @@ interface DataContextValuesType {
   departmentOption: DropdownSelectOption;
   genderOption: DropdownSelectOption;
   categoryOption: DropdownSelectOption;
+  amountOption: DropdownSelectOption;
 
   setVerifiedOption: SetVerifiedOptionType;
   setDepartmentOption: SetDepartmentOptionType;
   setGenderOption: SetGenderOptionType;
   setCategoryOption: SetCategoryOptionType;
+  setAmountOption: SetAmountOptionType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -68,6 +71,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [genderOption, setGenderOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
   const [categoryOption, setCategoryOption] = useState<DropdownSelectOption>({ label: 'Alle', value: null });
   const [allCategories, setAllCategories] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: null }]);
+  const [amountOption, setAmountOption] = useState<DropdownSelectOption>({ label: '15', value: '15' });
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -82,7 +86,6 @@ export const DataProvider = (props: DataProviderPropsType) => {
     };
 
     fetchCategories();
-    console.log('fetched Categories');
     // eslint-disable-next-line
   }, []);
 
@@ -95,6 +98,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
       department: departmentOption.value,
       gender: genderOption.value,
       category: categoryOption.value,
+      perPage: parseInt(amountOption.value, 10),
     }).then(response => {
       setPage(0);
       setIsLoading(false);
@@ -104,7 +108,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     });
   };
 
-  const fetchMoreTips = (perPage = 15): void => {
+  const fetchMoreTips = (): void => {
     setIsLoading(true);
     fetchTips({
       searchTerm: searchInput,
@@ -112,8 +116,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
       department: departmentOption.value,
       gender: genderOption.value,
       category: categoryOption.value,
+      perPage: parseInt(amountOption.value, 10),
       offset: page + 1,
-      perPage,
     }).then(response => {
       console.log('resppp', response);
 
@@ -144,6 +148,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
     setGenderOption,
     categoryOption,
     setCategoryOption,
+    amountOption,
+    setAmountOption,
   };
 
   const value = {
