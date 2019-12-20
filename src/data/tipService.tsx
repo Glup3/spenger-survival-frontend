@@ -8,6 +8,7 @@ interface FetchTipsArgs {
   department: string;
   gender: string;
   category: string;
+  schoolClass: string;
   offset?: number;
   perPage?: number;
   orderBy: string;
@@ -19,6 +20,7 @@ export const fetchTips = async ({
   department,
   gender,
   category,
+  schoolClass,
   offset = 0,
   perPage = 15,
   orderBy,
@@ -33,6 +35,7 @@ export const fetchTips = async ({
       department,
       gender,
       category,
+      schoolClass,
       orderBy,
     });
 
@@ -60,4 +63,16 @@ export const reportTip = async (id: number, title: string, message: string): Pro
     title,
     message,
   });
+};
+
+export const fetchSchoolClasses = async (): Promise<SchoolClass[]> => {
+  try {
+    const result = await axiosInstance.get('/tips/classes');
+
+    return result.data;
+  } catch (e) {
+    console.error('ERROR fetchSchoolClasses', e);
+  }
+
+  return [];
 };

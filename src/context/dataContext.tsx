@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-import { fetchTips, reportTip, addTip } from '../data/tipService';
+import { fetchTips, reportTip, addTip, fetchSchoolClasses } from '../data/tipService';
 import { sendFeedback } from '../data/feedbackService';
 import { getAllTodos } from '../data/todoService';
 import { getAllCategories } from '../data/categoryService';
@@ -24,6 +24,7 @@ type SetGenderOptionType = (value: DropdownSelectOption) => void;
 type SetCategoryOptionType = (value: DropdownSelectOption) => void;
 type SetAmountOptionType = (value: DropdownSelectOption) => void;
 type SetOrderByOptionType = (value: DropdownSelectOption) => void;
+type SetSchoolClassOptionType = (value: DropdownSelectOption) => void;
 
 interface DataProviderPropsType {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,6 +44,7 @@ interface DataContextValuesType {
   sendFeedback: SendFeedbackType;
   getAllTodos: GetAllTodosType;
   allCategories: DropdownSelectOption[];
+  allSchoolClasses: DropdownSelectOption[];
 
   verifiedOption: DropdownSelectOption;
   departmentOption: DropdownSelectOption;
@@ -50,6 +52,7 @@ interface DataContextValuesType {
   categoryOption: DropdownSelectOption;
   amountOption: DropdownSelectOption;
   orderByOption: DropdownSelectOption;
+  schoolClassOption: DropdownSelectOption;
 
   setVerifiedOption: SetVerifiedOptionType;
   setDepartmentOption: SetDepartmentOptionType;
@@ -57,6 +60,7 @@ interface DataContextValuesType {
   setCategoryOption: SetCategoryOptionType;
   setAmountOption: SetAmountOptionType;
   setOrderByOption: SetOrderByOptionType;
+  setSchoolClassOption: SetSchoolClassOptionType;
 }
 
 const DataContext = createContext<Partial<DataContextValuesType>>(null);
@@ -76,17 +80,29 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [allCategories, setAllCategories] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: null }]);
   const [amountOption, setAmountOption] = useState<DropdownSelectOption>({ label: '15', value: '15' });
   const [orderByOption, setOrderByOption] = useState<DropdownSelectOption>({ label: 'Neueste', value: 'DESC' });
+  const [schoolClassOption, setSchoolClassOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
+  const [allSchoolClasses, setAllSchoolClasses] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: '' }]);
 
   useEffect(() => {
     const fetchCategories = async () => {
       const fetchedCategories = await getAllCategories();
+      const fetchedSchoolClasses = await fetchSchoolClasses();
+
       const modifiedCategories = fetchedCategories.map<DropdownSelectOption>(category => {
         return {
           label: category.name,
           value: category.id.toString(),
         };
       });
+      const modifiedSchoolClasses = fetchedSchoolClasses.map<DropdownSelectOption>(schoolClass => {
+        return {
+          label: schoolClass.schoolClass || 'Unbekannt',
+          value: schoolClass.schoolClass,
+        };
+      });
+
       setAllCategories(allCategories.concat(modifiedCategories));
+      setAllSchoolClasses(allSchoolClasses.concat(modifiedSchoolClasses));
     };
 
     fetchCategories();
@@ -102,6 +118,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
       department: departmentOption.value,
       gender: genderOption.value,
       category: categoryOption.value,
+      schoolClass: schoolClassOption.value,
       perPage: parseInt(amountOption.value, 10),
       orderBy: orderByOption.value,
     }).then(response => {
@@ -121,6 +138,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
       department: departmentOption.value,
       gender: genderOption.value,
       category: categoryOption.value,
+      schoolClass: schoolClassOption.value,
       perPage: parseInt(amountOption.value, 10),
       offset: page + 1,
       orderBy: orderByOption.value,
@@ -156,12 +174,15 @@ export const DataProvider = (props: DataProviderPropsType) => {
     setAmountOption,
     orderByOption,
     setOrderByOption,
+    schoolClassOption,
+    setSchoolClassOption,
   };
 
   const value = {
     ...valueTips,
     ...valueTipsOptions,
     allCategories,
+    allSchoolClasses,
     isLoading,
     verifiedOption,
     sendFeedback,

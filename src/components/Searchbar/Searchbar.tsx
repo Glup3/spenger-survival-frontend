@@ -12,6 +12,7 @@ import SelectGender from '../DropdownSelects/SelectGender';
 import SelectCategory from '../DropdownSelects/SelectCategory';
 import SelectAmount from '../DropdownSelects/SelectAmount';
 import SelectOrderBy from '../DropdownSelects/SelectOrderBy';
+import SelectSchoolClass from '../DropdownSelects/SelectSchoolClass';
 
 const Searchbar = () => {
   const { value, bind, reset } = useInput('');
@@ -36,6 +37,7 @@ const Searchbar = () => {
       <SelectCategory />
       <SelectAmount />
       <SelectOrderBy />
+      <SelectSchoolClass />
       <form onSubmit={onSubmit}>
         <div className="input-group">
           <input
