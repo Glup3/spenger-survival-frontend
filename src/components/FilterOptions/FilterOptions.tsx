@@ -10,6 +10,7 @@ import SelectSchoolClass from '../DropdownSelects/SelectSchoolClass';
 import SelectAuthor from '../DropdownSelects/SelectAuthor';
 import Searchbar from '../Searchbar';
 import TipsCounter from '../TipsCounter/TipsCounter';
+import SearchButton from '../SearchButton';
 
 const FilterOptions = () => {
   return (
@@ -56,7 +57,7 @@ const FilterOptions = () => {
         </div>
 
         <div className="col-sm-6 justify-content-end d-flex">
-          <button className="btn btn-primary">Suchen</button>
+          <SearchButton />
         </div>
       </div>
     </div>

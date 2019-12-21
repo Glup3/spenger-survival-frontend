@@ -10,7 +10,7 @@ const InfiniteScroller = () => {
   const data = useData();
 
   useEffect(() => {
-    data.fetchInitialTips(null);
+    data.fetchInitialTips();
     // eslint-disable-next-line
   }, []);
 

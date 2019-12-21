@@ -10,13 +10,14 @@ interface ChangeOptions {
   optionDepartment?: DropdownSelectOption;
 }
 
-type FetchInitialTipsType = (searchTerm: string) => void;
+type FetchInitialTipsType = () => void;
 type FetchMoreTipsType = (perPage?: number) => void;
 type AddTipType = (tip: AddTipBody) => Promise<boolean>;
 type ReportTipType = (id: number, title: string, message: string) => Promise<void>;
 type SetSelectedTipType = (value: Tip) => void;
 type SendFeedbackType = (message: string, messageType: string) => Promise<void>;
 type GetAllTodosType = () => Promise<Todo[]>;
+type SetSearchTermType = (value: string) => void;
 
 type SetDepartmentOptionType = (value: DropdownSelectOption) => void;
 type SetVerifiedOptionType = (value: DropdownSelectOption) => void;
@@ -48,6 +49,9 @@ interface DataContextValuesType {
   allSchoolClasses: DropdownSelectOption[];
   allAuthors: DropdownSelectOption[];
 
+  searchTerm: string;
+  setSearchTerm: SetSearchTermType;
+
   verifiedOption: DropdownSelectOption;
   departmentOption: DropdownSelectOption;
   genderOption: DropdownSelectOption;
@@ -73,7 +77,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [selectedTip, setSelectedTip] = useState<Tip>(null);
   const [tips, setTips] = useState<Tip[]>([]);
   const [tipsCount, setTipsCount] = useState(0);
-  const [searchInput, setSearchInput] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -123,7 +127,7 @@ export const DataProvider = (props: DataProviderPropsType) => {
     // eslint-disable-next-line
   }, []);
 
-  const fetchInitialTips = (searchTerm: string): void => {
+  const fetchInitialTips = (): void => {
     setIsLoading(true);
 
     fetchTips({
@@ -139,31 +143,32 @@ export const DataProvider = (props: DataProviderPropsType) => {
     }).then(response => {
       setPage(0);
       setIsLoading(false);
-      setSearchInput(searchTerm);
       setTipsCount(response.count);
       setTips(response.rows);
     });
   };
 
   const fetchMoreTips = (): void => {
-    setIsLoading(true);
-    fetchTips({
-      searchTerm: searchInput,
-      verified: verifiedOption.value,
-      department: departmentOption.value,
-      gender: genderOption.value,
-      category: categoryOption.value,
-      schoolClass: schoolClassOption.value,
-      author: authorOption.value,
-      perPage: parseInt(amountOption.value, 10),
-      offset: page + 1,
-      orderBy: orderByOption.value,
-    }).then(response => {
-      setPage(page + 1);
-      setIsLoading(false);
-      setTips(tips.concat(response.rows));
-      setTipsCount(response.count);
-    });
+    if (!isLoading) {
+      setIsLoading(true);
+      fetchTips({
+        searchTerm,
+        verified: verifiedOption.value,
+        department: departmentOption.value,
+        gender: genderOption.value,
+        category: categoryOption.value,
+        schoolClass: schoolClassOption.value,
+        author: authorOption.value,
+        perPage: parseInt(amountOption.value, 10),
+        offset: page + 1,
+        orderBy: orderByOption.value,
+      }).then(response => {
+        setPage(page + 1);
+        setIsLoading(false);
+        setTips(tips.concat(response.rows));
+        setTipsCount(response.count);
+      });
+    }
   };
 
   const valueTips = {
@@ -175,6 +180,8 @@ export const DataProvider = (props: DataProviderPropsType) => {
     reportTip,
     selectedTip,
     setSelectedTip,
+    searchTerm,
+    setSearchTerm,
   };
 
   const valueTipsOptions = {
@@ -214,5 +221,3 @@ export const DataProvider = (props: DataProviderPropsType) => {
 export const useData = () => {
   return useContext(DataContext);
 };
-
-// TODO Fetch only on BUTTON CLICK
