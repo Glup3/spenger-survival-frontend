@@ -36,27 +36,27 @@ const FilterOptions = () => {
           <SelectSchoolClass />
         </div>
 
-        <div className="col-sm-3">
+        <div className="col-6 col-sm-3">
           <SelectCategory />
         </div>
 
-        <div className="col-sm-3">
+        <div className="col-6 col-sm-3">
           <SelectVerified />
         </div>
 
-        <div className="col-sm-3">
+        <div className="col-6 col-sm-3">
           <SelectOrderBy />
         </div>
 
-        <div className="col-sm-3">
+        <div className="col-6 col-sm-3">
           <SelectAmount />
         </div>
 
-        <div className="col-sm-6">
+        <div className="col-6">
           <TipsCounter />
         </div>
 
-        <div className="col-sm-6 justify-content-end d-flex">
+        <div className="col-6 justify-content-end d-flex">
           <SearchButton />
         </div>
       </div>

@@ -20,7 +20,7 @@ const SelectAmount = () => {
 
   return (
     <div className="form-group">
-      <label htmlFor="amountSelect">Tipps pro Seite</label>
+      <label htmlFor="amountSelect">pro Seite</label>
       <DropdownSelect
         id="amountSelect"
         searchable={false}

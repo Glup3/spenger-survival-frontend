@@ -32,7 +32,7 @@ const FeedbackForm = () => {
   return (
     <form onSubmit={onSubmit}>
       <div className="form-group row">
-        <div className="col-6">
+        <div className="col-sm-9 col-md-6">
           <label htmlFor="messageType">
             Art
             <RequiredStar />
