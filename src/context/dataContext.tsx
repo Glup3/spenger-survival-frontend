@@ -85,13 +85,13 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [departmentOption, setDepartmentOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
   const [genderOption, setGenderOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
   const [categoryOption, setCategoryOption] = useState<DropdownSelectOption>({ label: 'Alle', value: null });
-  const [allCategories, setAllCategories] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: null }]);
+  const [allCategories, setAllCategories] = useState<DropdownSelectOption[]>([]);
   const [amountOption, setAmountOption] = useState<DropdownSelectOption>({ label: '15', value: '15' });
   const [orderByOption, setOrderByOption] = useState<DropdownSelectOption>({ label: 'Neueste', value: 'DESC' });
   const [schoolClassOption, setSchoolClassOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
-  const [allSchoolClasses, setAllSchoolClasses] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: '' }]);
+  const [allSchoolClasses, setAllSchoolClasses] = useState<DropdownSelectOption[]>();
   const [authorOption, setAuthorOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
-  const [allAuthors, setAllAuthors] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: '' }]);
+  const [allAuthors, setAllAuthors] = useState<DropdownSelectOption[]>([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -118,9 +118,9 @@ export const DataProvider = (props: DataProviderPropsType) => {
         };
       });
 
-      setAllCategories(allCategories.concat(modifiedCategories));
-      setAllSchoolClasses(allSchoolClasses.concat(modifiedSchoolClasses));
-      setAllAuthors(allAuthors.concat(modifiedAuthors));
+      setAllCategories(modifiedCategories);
+      setAllSchoolClasses(modifiedSchoolClasses);
+      setAllAuthors(modifiedAuthors);
     };
 
     fetchCategories();

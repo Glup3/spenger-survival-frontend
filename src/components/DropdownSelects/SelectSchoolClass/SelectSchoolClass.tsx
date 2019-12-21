@@ -17,7 +17,7 @@ const SelectSchoolClass = () => {
         id="schoolClassSelect"
         searchable={true}
         closeOnScroll={true}
-        options={data.allSchoolClasses}
+        options={[{ label: 'Alle', value: '' }].concat(data.allSchoolClasses)}
         values={[data.schoolClassOption]}
         onChange={onChange}
       />
