@@ -27,20 +27,17 @@ const Navbar = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <NavbarLink pathname={pathname} url="/faq">
-            FAQ
-          </NavbarLink>
           <NavbarLink pathname={pathname} url="/tipp-abgeben">
             Tipp abgeben
           </NavbarLink>
           <NavbarLink pathname={pathname} url="/hall-of-fame">
             Hall of Fame
           </NavbarLink>
+          <NavbarLink pathname={pathname} url="/faq">
+            FAQ
+          </NavbarLink>
         </ul>
         <ul className="navbar-nav">
-          <NavbarLink pathname={pathname} url="/roadmap">
-            Roadmap
-          </NavbarLink>
           <NavbarLink pathname={pathname} url="/feedback">
             Feedback
           </NavbarLink>
