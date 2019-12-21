@@ -77,3 +77,22 @@ export const helpers: Person[] = [
     image: 'julian.jpeg',
   },
 ];
+
+export const genderOptions: DropdownSelectOption[] = [
+  { label: 'Keine Angabe', value: null },
+  { label: 'Männlich', value: 'm' },
+  { label: 'Divers', value: '+' },
+  { label: 'Weiblich', value: 'w' },
+];
+
+export const departmentOptions: DropdownSelectOption[] = [
+  { label: 'Abteilungslos', value: null },
+  { label: 'Animation', value: 'Animation' },
+  { label: 'Biomedizin', value: 'Biomedizin' },
+  { label: 'Fachschule Informatik', value: 'Fachschule Informatik' },
+  { label: 'Gamedesign', value: 'Gamedesign' },
+  { label: 'Interior- und Surfacedesign', value: 'Interior- und Surfacedesign' },
+  { label: 'Informatik', value: 'Informatik' },
+  { label: 'Kolleg', value: 'Kolleg' },
+  { label: 'Wirtschaft', value: 'Wirtschaft' },
+];

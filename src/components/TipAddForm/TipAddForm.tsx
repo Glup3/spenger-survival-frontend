@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Redirect } from 'react-router-dom';
+import DropdownSelect from 'react-dropdown-select';
 
 import RulesModal from '../RulesModal';
 import RequiredStar from '../RequiredStar';
 import useInput from '../../hooks/input-hook';
 import { useData } from '../../context/dataContext';
 import { isEmptyOrSpaces } from '../../util/string-helper';
+import { genderOptions, departmentOptions } from '../../constants';
 
 import './TipAddForm.scss';
 
@@ -28,8 +30,11 @@ const TipAddForm = () => {
   const { value: titleValue, bind: titleBind } = useInput('');
   const { value: nameValue, bind: nameBind } = useInput('');
   const { value: schoolClassValue, bind: schoolClassBind } = useInput('');
-  const { value: genderValue, bind: genderBind } = useInput('');
-  const { value: departmentValue, bind: departmentBind } = useInput('');
+  // const { value: genderValue, bind: genderBind } = useInput('');
+  // const { value: departmentValue, bind: departmentBind } = useInput('');
+
+  const [gender, setGender] = useState<DropdownSelectOption>(genderOptions[0]);
+  const [department, setDepartment] = useState<DropdownSelectOption>(departmentOptions[0]);
 
   const [description, setDescription] = useState('');
   const [descriptionError, setDescriptionError] = useState(false);
@@ -81,8 +86,8 @@ const TipAddForm = () => {
       title: titleValue,
       schoolClass: schoolClassValue === '' ? null : schoolClassValue,
       author: nameValue === '' ? null : nameValue,
-      gender: genderValue === '' ? null : genderValue,
-      department: departmentValue === '' ? null : departmentValue,
+      gender: gender.value,
+      department: department.value,
       captcha: captchaValue,
       description,
     };
@@ -113,7 +118,7 @@ const TipAddForm = () => {
   return (
     <>
       <form onSubmit={onSubmit} noValidate>
-        <div className="row mb-4">
+        <div className="form-group row">
           <div className="col">
             <label htmlFor="name">Name</label>
             <input
@@ -128,16 +133,18 @@ const TipAddForm = () => {
 
           <div className="col">
             <label htmlFor="geschlecht">Geschlecht</label>
-            <select className="form-control" id="geschlecht" value={genderValue} {...genderBind}>
-              <option value="">Keine Angabe</option>
-              <option value="m">Männlich</option>
-              <option value="+">Divers</option>
-              <option value="w">Weiblich</option>
-            </select>
+            <DropdownSelect
+              id="geschlecht"
+              searchable={false}
+              closeOnScroll={true}
+              options={genderOptions}
+              values={[gender]}
+              onChange={(values: DropdownSelectOption[]) => setGender(values[0])}
+            />
           </div>
         </div>
 
-        <div className="row mb-4">
+        <div className="form-group row">
           <div className="col">
             <label htmlFor="klasse">Klasse</label>
             <input
@@ -152,17 +159,14 @@ const TipAddForm = () => {
 
           <div className="col">
             <label htmlFor="abteilung">Abteilung</label>
-            <select className="form-control" id="abteilung" value={departmentValue} {...departmentBind}>
-              <option value="">Keine Angabe</option>
-              <option value="Animation">Animation</option>
-              <option value="Biomedizin">Biomedizin</option>
-              <option value="Fachschule Informatik">Fachschule Informatik</option>
-              <option value="Gamedesign">Gamedesign</option>
-              <option value="Interior- und Surfacedesign">Interior- und Surfacedesign</option>
-              <option value="Informatik">Informatik</option>
-              <option value="Kolleg">Kolleg</option>
-              <option value="Wirtschaft">Wirtschaft</option>
-            </select>
+            <DropdownSelect
+              id="abteilung"
+              searchable={false}
+              closeOnScroll={true}
+              options={departmentOptions}
+              values={[department]}
+              onChange={(values: DropdownSelectOption[]) => setDepartment(values[0])}
+            />
           </div>
         </div>
 
@@ -214,12 +218,10 @@ const TipAddForm = () => {
           {captchaError ? <span className="text-danger">ReCAPTCHA machen!</span> : <></>}
         </div>
 
-        {!success ? (
+        {!success && (
           <div className="form-group">
             <span className="text-danger"></span>
           </div>
-        ) : (
-          <></>
         )}
 
         <div>

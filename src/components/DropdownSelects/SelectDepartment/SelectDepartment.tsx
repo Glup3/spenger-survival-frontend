@@ -2,22 +2,10 @@ import React from 'react';
 import DropdownSelect from 'react-dropdown-select';
 
 import { useData } from '../../../context/dataContext';
+import { departmentOptions } from '../../../constants';
 
 const SelectDepartment = () => {
   const data = useData();
-
-  const options: DropdownSelectOption[] = [
-    { label: 'Alle', value: '' },
-    { label: 'Abteilungslos', value: null },
-    { label: 'Animation', value: 'Animation' },
-    { label: 'Biomedizin', value: 'Biomedizin' },
-    { label: 'Fachschule Informatik', value: 'Fachschule Informatik' },
-    { label: 'Gamedesign', value: 'Gamedesign' },
-    { label: 'Interior- und Surfacedesign', value: 'Interior- und Surfacedesign' },
-    { label: 'Informatik', value: 'Informatik' },
-    { label: 'Kolleg', value: 'Kolleg' },
-    { label: 'Wirtschaft', value: 'Wirtschaft' },
-  ];
 
   const onChange = (values: DropdownSelectOption[]) => {
     data.setDepartmentOption(values[0]);
@@ -30,7 +18,7 @@ const SelectDepartment = () => {
         id="departmentSelect"
         searchable={true}
         closeOnScroll={true}
-        options={options}
+        options={[{ label: 'Alle', value: '' }].concat(departmentOptions)}
         values={[data.departmentOption]}
         onChange={onChange}
       />
