@@ -20,7 +20,7 @@ const Searchbar = () => {
         <input
           className={`form-control ${data.searchTerm === '' ? 'border-dark' : 'border-primary'}`}
           type="text"
-          placeholder="Textsuchen..."
+          placeholder="Textsuche..."
           aria-label="Search"
           onChange={e => data.setSearchTerm(e.target.value)}
           value={data.searchTerm}

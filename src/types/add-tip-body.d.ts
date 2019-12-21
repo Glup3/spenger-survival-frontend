@@ -6,4 +6,5 @@ interface AddTipBody {
   department: string;
   captcha: string;
   description: string;
+  category: string;
 }

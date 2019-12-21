@@ -42,12 +42,16 @@ interface DataContextValuesType {
   reportTip: ReportTipType;
   selectedTip: Tip;
   setSelectedTip: SetSelectedTipType;
-  isLoading: boolean;
   sendFeedback: SendFeedbackType;
   getAllTodos: GetAllTodosType;
   allCategories: DropdownSelectOption[];
   allSchoolClasses: DropdownSelectOption[];
   allAuthors: DropdownSelectOption[];
+
+  isLoading: boolean;
+  isAuthorsLoading: boolean;
+  isCategoriesLoading: boolean;
+  isSchoolClassesLoading: boolean;
 
   searchTerm: string;
   setSearchTerm: SetSearchTermType;
@@ -79,22 +83,30 @@ export const DataProvider = (props: DataProviderPropsType) => {
   const [tipsCount, setTipsCount] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
+
   const [isLoading, setIsLoading] = useState(false);
+  const [isAuthorsLoading, setIsAuthorsLoading] = useState(false);
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState(false);
+  const [isSchoolClassesLoading, setIsSchoolClassesLoading] = useState(false);
 
   const [verifiedOption, setVerifiedOption] = useState<DropdownSelectOption>({ label: 'Alle', value: null });
   const [departmentOption, setDepartmentOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
   const [genderOption, setGenderOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
-  const [categoryOption, setCategoryOption] = useState<DropdownSelectOption>({ label: 'Alle', value: null });
-  const [allCategories, setAllCategories] = useState<DropdownSelectOption[]>([]);
+  const [categoryOption, setCategoryOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
+  const [allCategories, setAllCategories] = useState<DropdownSelectOption[]>([{ label: 'Alle', value: '' }]);
   const [amountOption, setAmountOption] = useState<DropdownSelectOption>({ label: '15', value: '15' });
   const [orderByOption, setOrderByOption] = useState<DropdownSelectOption>({ label: 'Neueste', value: 'DESC' });
   const [schoolClassOption, setSchoolClassOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
-  const [allSchoolClasses, setAllSchoolClasses] = useState<DropdownSelectOption[]>();
+  const [allSchoolClasses, setAllSchoolClasses] = useState<DropdownSelectOption[]>([]);
   const [authorOption, setAuthorOption] = useState<DropdownSelectOption>({ label: 'Alle', value: '' });
   const [allAuthors, setAllAuthors] = useState<DropdownSelectOption[]>([]);
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchInitialData = async () => {
+      setIsAuthorsLoading(true);
+      setIsCategoriesLoading(true);
+      setIsSchoolClassesLoading(true);
+
       const fetchedCategories = await getAllCategories();
       const fetchedSchoolClasses = await fetchSchoolClasses();
       const fetchedAuthors = await fetchAuthors();
@@ -121,9 +133,13 @@ export const DataProvider = (props: DataProviderPropsType) => {
       setAllCategories(modifiedCategories);
       setAllSchoolClasses(modifiedSchoolClasses);
       setAllAuthors(modifiedAuthors);
+
+      setIsAuthorsLoading(false);
+      setIsCategoriesLoading(false);
+      setIsSchoolClassesLoading(false);
     };
 
-    fetchCategories();
+    fetchInitialData();
     // eslint-disable-next-line
   }, []);
 
@@ -210,6 +226,9 @@ export const DataProvider = (props: DataProviderPropsType) => {
     allSchoolClasses,
     allAuthors,
     isLoading,
+    isAuthorsLoading,
+    isCategoriesLoading,
+    isSchoolClassesLoading,
     verifiedOption,
     sendFeedback,
     getAllTodos,

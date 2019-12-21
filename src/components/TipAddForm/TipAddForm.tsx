@@ -30,11 +30,10 @@ const TipAddForm = () => {
   const { value: titleValue, bind: titleBind } = useInput('');
   const { value: nameValue, bind: nameBind } = useInput('');
   const { value: schoolClassValue, bind: schoolClassBind } = useInput('');
-  // const { value: genderValue, bind: genderBind } = useInput('');
-  // const { value: departmentValue, bind: departmentBind } = useInput('');
 
   const [gender, setGender] = useState<DropdownSelectOption>(genderOptions[0]);
   const [department, setDepartment] = useState<DropdownSelectOption>(departmentOptions[0]);
+  const [category, setCategory] = useState<DropdownSelectOption>({ label: 'Keine', value: null });
 
   const [description, setDescription] = useState('');
   const [descriptionError, setDescriptionError] = useState(false);
@@ -61,7 +60,7 @@ const TipAddForm = () => {
       setTitleError(false);
     }
 
-    if (isEmptyOrSpaces(description)) {
+    if (description.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
       setDescriptionError(true);
       hasErrors = true;
     } else {
@@ -82,7 +81,7 @@ const TipAddForm = () => {
       return;
     }
 
-    const newTip = {
+    const newTip: AddTipBody = {
       title: titleValue,
       schoolClass: schoolClassValue === '' ? null : schoolClassValue,
       author: nameValue === '' ? null : nameValue,
@@ -90,6 +89,7 @@ const TipAddForm = () => {
       department: department.value,
       captcha: captchaValue,
       description,
+      category: category.value,
     };
 
     const result = await data.addTip(newTip);
@@ -170,20 +170,36 @@ const TipAddForm = () => {
           </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="titel">
-            Titel
-            <RequiredStar />
-          </label>
-          <input
-            type="text"
-            className={`form-control ${titleError ? 'border border-danger' : ''}`}
-            id="titel"
-            placeholder="Titel"
-            value={titleValue}
-            {...titleBind}
-          />
-          {titleError ? <span className="text-danger">Titel eingeben!</span> : <></>}
+        <div className="form-group row">
+          <div className="col">
+            <label htmlFor="titel">
+              Titel
+              <RequiredStar />
+            </label>
+            <input
+              type="text"
+              className={`form-control ${titleError && 'border border-danger'}`}
+              id="titel"
+              placeholder="Titel"
+              value={titleValue}
+              {...titleBind}
+            />
+            {titleError && <span className="text-danger">Titel eingeben!</span>}
+          </div>
+
+          <div className="col">
+            <label htmlFor="kategorie">Kategorie</label>
+            <DropdownSelect
+              id="kategorie"
+              searchable={true}
+              closeOnScroll={true}
+              loading={data.isCategoriesLoading}
+              disabled={data.isCategoriesLoading}
+              options={[{ label: 'Keine', value: null }].concat(data.allCategories)}
+              values={[category]}
+              onChange={(values: DropdownSelectOption[]) => setCategory(values[0])}
+            />
+          </div>
         </div>
 
         <div className="form-group">
@@ -207,15 +223,15 @@ const TipAddForm = () => {
             defaultValue={description}
             onChange={onDescriptionChange}
             id="beschreibung"
-            className={`${descriptionError ? 'border border-danger' : ''}`}
+            className={`${descriptionError && 'border border-danger'}`}
           />
-          {descriptionError ? <span className="text-danger">Text eingeben!</span> : <></>}
-          {limitExceeded ? <span className="float-right text-danger">Zu viele Zeichen!</span> : <></>}
+          {descriptionError && <span className="text-danger">Text eingeben!</span>}
+          {limitExceeded && <span className="float-right text-danger">Zu viele Zeichen!</span>}
         </div>
 
         <div className="form-group">
           <ReCAPTCHA sitekey="6LcTNMQUAAAAAGt-okF_vs0tfm3eouRqpN6SM3i7" onChange={value => setCaptchaValue(value)} />
-          {captchaError ? <span className="text-danger">ReCAPTCHA machen!</span> : <></>}
+          {captchaError && <span className="text-danger">ReCAPTCHA machen!</span>}
         </div>
 
         {!success && (

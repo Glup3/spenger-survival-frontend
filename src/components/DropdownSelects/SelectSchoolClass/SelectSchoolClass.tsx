@@ -17,6 +17,8 @@ const SelectSchoolClass = () => {
         id="schoolClassSelect"
         searchable={true}
         closeOnScroll={true}
+        loading={data.isSchoolClassesLoading}
+        disabled={data.isSchoolClassesLoading}
         options={[{ label: 'Alle', value: '' }].concat(data.allSchoolClasses)}
         values={[data.schoolClassOption]}
         onChange={onChange}

@@ -17,7 +17,12 @@ const SelectCategory = () => {
         id="categorySelect"
         searchable={true}
         closeOnScroll={true}
-        options={[{ label: 'Alle', value: null }].concat(data.allCategories)}
+        loading={data.isCategoriesLoading}
+        disabled={data.isCategoriesLoading}
+        options={[
+          { label: 'Alle', value: '' },
+          { label: 'Keine', value: null },
+        ].concat(data.allCategories)}
         values={[data.categoryOption]}
         onChange={onChange}
       />

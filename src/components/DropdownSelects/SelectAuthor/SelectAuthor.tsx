@@ -17,6 +17,8 @@ const SelectAuthor = () => {
         id="authorSelect"
         searchable={true}
         closeOnScroll={true}
+        loading={data.isAuthorsLoading}
+        disabled={data.isAuthorsLoading}
         options={[{ label: 'Alle', value: '' }].concat(data.allAuthors)}
         values={[data.authorOption]}
         onChange={onChange}
