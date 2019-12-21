@@ -7,6 +7,7 @@ import TipCardSchoolClass from '../TipCardSchoolClass';
 import TipCardDate from '../TipCardDate';
 import CardTitle from '../CardTitle';
 import ReportButton from '../ReportButton';
+import TipCategory from '../TipCategory';
 
 interface TipCardPropsType {
   tip: Tip;
@@ -22,6 +23,9 @@ const TipCard = ({ tip }: TipCardPropsType) => {
           <GenderIcon gender={tip.gender} />
         </h6>
         <div className="card-text" dangerouslySetInnerHTML={{ __html: tip.description }}></div>
+        <div className="card-text mt-3">
+          <TipCategory category={tip.category} />
+        </div>
         <div className="card-text">
           <div className="float-left">
             <TipCardDate issueDate={tip.issueDate} />
